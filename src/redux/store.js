@@ -8,6 +8,7 @@ import rootReducer from './reducers/index.js'
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  whiltelist : ['Auth'],
   // blacklist: ['Auth'] //kesimpen semua data kecuali yang ada dilists
   // whiltelist: ['Auth', 'Favorites'] //kesimpen  data hanya dilists
 
