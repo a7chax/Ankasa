@@ -5,16 +5,18 @@ import styles from './navigation.style.js'
 
 
 function Navigation(props){
-	const {backTo, pageTitle} = props
+	const {onPress, pageTitle} = props
 
 	return(
 		<View style={styles.navigateDis}>
 			<View>
-			 	<Icon name="chevron-left" size={30} color="black" />
+				<TouchableNativeFeedback onPress={onPress}>
+			 		<Icon name="chevron-left" size={25} color="black" />
+			 	</TouchableNativeFeedback>
 			</View>
 
 			<View>
-				<Text style={styles.textTitle}>Regular Login</Text>
+				<Text style={styles.textTitle}>{pageTitle}</Text>
 			</View>
 		</View>
 	)
