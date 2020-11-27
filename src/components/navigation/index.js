@@ -5,7 +5,7 @@ import styles from './navigation.style.js'
 
 
 function Navigation(props){
-	const {onPress, pageTitle} = props
+	const {onPress, pageTitle, pageTitleEvent} = props
 
 	return(
 		<View style={styles.navigateDis}>
@@ -16,7 +16,9 @@ function Navigation(props){
 			</View>
 
 			<View>
-				<Text style={styles.textTitle}>{pageTitle}</Text>
+				<TouchableNativeFeedback onPress={pageTitleEvent}>
+					<Text style={styles.textTitle}>{pageTitle}</Text>
+				</TouchableNativeFeedback>
 			</View>
 		</View>
 	)

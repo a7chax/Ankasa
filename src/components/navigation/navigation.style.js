@@ -8,7 +8,8 @@ export default StyleSheet.create({
 		flexDirection : 'row',
 		justifyContent : 'space-between',
 		marginHorizontal : 31,
-		marginVertical : 31
+		marginTop : 31,
+		marginBottom : 23
 	},
 	textTitle : {
 		color : '#2395FF',
