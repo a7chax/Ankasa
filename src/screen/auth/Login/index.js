@@ -8,8 +8,7 @@ import {
   Image,
   TextInput,
 } from 'react-native';
-import {Button} from 'react-native-paper';
-import {ButtonWelcome, ButtonSignIn, ButtonSignUp} from '../../../components';
+import {ButtonSignUp} from '../../../components';
 
 const Login = (props) => {
   const [loading, setLoading] = React.useState(false);
