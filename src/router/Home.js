@@ -1,6 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Explore, Profile} from '../screen';
+import {Explore} from '../screen';
 
 import Icons from 'react-native-vector-icons/Ionicons';
 import {View} from 'react-native';
@@ -10,7 +10,7 @@ const Tab = createBottomTabNavigator();
 function Home() {
   return (
     <Tab.Navigator
-      initialRouteName="Booking"
+      initialRouteName="Explore"
       tabBarOptions={{
         activeTintColor: '#2395FF',
         tabStyle: {
