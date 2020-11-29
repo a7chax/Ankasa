@@ -19,8 +19,8 @@ export default StyleSheet.create({
 	},
 	pageTitle : {
 		fontFamily : 'Poppins-SemiBold',
-		fontSize : 16,
+		fontSize : 20,
 		color : '#FFFFFF',
-		lineHeight : 32
+		lineHeight : 45
 	}
 })

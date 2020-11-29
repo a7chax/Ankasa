@@ -11,7 +11,7 @@ function NavigationDotted(props){
 		<View style={styles.navigateDis}>
 			<View style ={{flexDirection : 'row'}}>
 				<TouchableNativeFeedback onPress={onPress}>
-			 		<Icon name="chevron-left" size={25} color="white" />
+			 		<Icon name="chevron-left" size={40} color="white" />
 			 	</TouchableNativeFeedback>
 
 			 	<View style={{marginLeft : 37}}>
@@ -19,7 +19,7 @@ function NavigationDotted(props){
 			 	</View>
 			</View>
 
-			<View>
+			<View style={{marginTop : 7}}>
 				<TouchableNativeFeedback onPress={dotAction}>
 					<Icon name="dots-vertical" size={25} color="white"/>
 				</TouchableNativeFeedback>
