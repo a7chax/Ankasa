@@ -29,7 +29,6 @@ const Welcome = (props) => {
         <View style={{marginTop: 60}}>
           <ButtonWelcome
             title="Create My Account"
-            mode="contained"
             disabled={loading}
             loading={loading}
             onPress={() => props.navigation.navigate('Register')}
