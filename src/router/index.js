@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 function Routes(){
 	return(
 		<NavigationContainer>
-			<Stack.Navigator initialRouteName="Auth" headerMode>				
+			<Stack.Navigator initialRouteName="SearchResult" headerMode>				
 				<Stack.Screen name="Auth" component={Auth}/>
 				<Stack.Screen name="SearchResult" component={SearchResult}/>
 			

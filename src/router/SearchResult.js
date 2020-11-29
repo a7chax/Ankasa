@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 
 function Auth() {
 	return(
-		<Stack.Navigator initialRouteName='Welcome' headerMode>
+		<Stack.Navigator initialRouteName='SearchResult' headerMode>
 			<Stack.Screen name="SearchResult" component={SearchResult} />
 			</Stack.Navigator>
 	)
