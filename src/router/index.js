@@ -13,6 +13,7 @@ function Routes(){
 			<Stack.Navigator initialRouteName="SearchResult" headerMode>				
 				<Stack.Screen name="Auth" component={Auth}/>
 				<Stack.Screen name="SearchResult" component={SearchResult}/>
+				
 			
 			</Stack.Navigator>
 		</NavigationContainer>
