@@ -1,6 +1,14 @@
 import React from 'react';
-import {StyleSheet, Text, View, ScrollView, Image} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import {Button} from 'react-native-paper';
+// import Welcome from '../../../assets'
 import {ButtonWelcome, ButtonSignIn} from '../../../components';
 
 const Welcome = (props) => {
@@ -29,13 +37,15 @@ const Welcome = (props) => {
         </View>
 
         <View style={{marginTop: 20}}>
-          <ButtonSignIn
-            title="Sign In"
-            // mode="outlined"
-            disabled={loading}
-            loading={loading}
-            onPress={() => props.navigation.navigate('Login')}
-          />
+          <TouchableOpacity 
+          disabled={loading}
+          loading={loading}
+          onPress={() => props.navigation.navigate('Login')}>
+            <Text
+              style={styles.signin}>
+              Sign In
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
@@ -55,4 +65,16 @@ const styles = StyleSheet.create({
     width: 285,
     height: 66,
   },
+  signin: {
+    fontFamily: 'Poppins-SemiBold',
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: '#2395FF',
+    textAlign: 'center',
+    borderRadius: 10,
+    paddingLeft: 125,
+    paddingRight: 125,
+    color: '#2395FF',
+    padding: 6,
+  }
 });
