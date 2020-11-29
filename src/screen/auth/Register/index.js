@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   TextInput,
+  TouchableOpacity
 } from 'react-native';
 import {Button} from 'react-native-paper';
 import {ButtonWelcome, ButtonSignIn, ButtonSignUp} from '../../../components';
@@ -40,6 +41,7 @@ const Register = (props) => {
 
         <View style={styles.inputItem}>
           <TextInput
+          fontFamily= 'Lato-Regular'
             placeholder="Email"
             autoCapitalize={'none'}
             value={email}
@@ -61,13 +63,14 @@ const Register = (props) => {
             underlineColorAndroid="#fff"
           />
           <Image
-            style={{marginLeft: '65%'}}
+            style={{position: 'absolute',right: '0%'}}
             source={require('../../../assets/illustration/eye.png')}
           />
         </View>
 
         <View style={{marginTop: 60}}>
           <ButtonSignUp
+          fontFamily='Poppins-SemiBold'
             title="Sign Up"
             mode="contained"
             disabled={loading}
@@ -82,7 +85,7 @@ const Register = (props) => {
           style={{marginLeft: '10%', marginTop: '8%'}}
           source={require('../../../assets/illustration/checkbox.png')}
         />
-        <Text style={{marginLeft: '3%', marginTop: '8%'}}>
+        <Text style={{marginLeft: '3%', marginTop: '8%', fontFamily: 'Lato-Regular'}}>
           Accept terms and condition
         </Text>
       </View>
@@ -92,16 +95,18 @@ const Register = (props) => {
           style={{marginTop: '10%'}}
           source={require('../../../assets/illustration/divider.png')}
         />
-        <Text style={{margin: '4%'}}>Already have an account?</Text>
+        <Text style={{margin: '4%', fontFamily: 'Lato-Regular'}}>Already have an account?</Text>
 
         <View style={{marginTop: 20}}>
-          <ButtonSignIn
-            title="Sign In"
-            // mode="outlined"
-            disabled={loading}
-            loading={loading}
-            onPress={() => props.navigation.navigate('Login')}
-          />
+        <TouchableOpacity 
+          disabled={loading}
+          loading={loading}
+          onPress={() => props.navigation.navigate('Login')}>
+            <Text
+              style={styles.signin}>
+              Sign In
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
@@ -120,11 +125,24 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
     fontSize: 36,
   },
+  signin: {
+    fontFamily: 'Poppins-SemiBold',
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: '#2395FF',
+    textAlign: 'center',
+    borderRadius: 10,
+    paddingLeft: 125,
+    paddingRight: 125,
+    color: '#2395FF',
+    padding: 6,
+  },
   inputItem: {
     //  padding: 5,
     //  borderWidth: 1,
     //  borderColor: '#333',
     //  marginVertical: 5,
+    fontFamily: 'Lato-Regular',
     marginTop: '6%',
     flexDirection: 'row',
     width: '75%',
