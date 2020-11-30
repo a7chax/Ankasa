@@ -7,7 +7,7 @@ import MyBooking from './home/MyBooking';
 import LoginFingerprint from './auth/LoginFingerprint';
 import ForgotPassword from './auth/ForgotPassword';
 import Notification from './home/Notification/'
-
+import DetailBooking from './home/DetailBooking/'
 export {
   Login,
   Register,
@@ -17,5 +17,6 @@ export {
   Explore,
   Profile,
 	MyBooking,
-	Notification
+Notification,
+DetailBooking
 };
