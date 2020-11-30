@@ -10,6 +10,8 @@ import LoginFingerprint from './auth/LoginFingerprint';
 import ForgotPassword from './auth/ForgotPassword';
 import Notification from './home/Notification/';
 import DetailBooking from './home/DetailBooking/';
+import FlightDetail from './home/FlightDetail';
+
 export {
   Login,
   Register,
@@ -23,4 +25,5 @@ export {
   DetailBooking,
   SearchFlight,
   SearchResult,
+  FlightDetail,
 };

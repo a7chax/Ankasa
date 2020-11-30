@@ -6,6 +6,9 @@ import {
 import {RFPercentage as fp} from 'react-native-responsive-fontsize';
 
 export default StyleSheet.create({
+  textinit: {
+    color: 'black',
+  },
   appBar: {
     paddingHorizontal: 28,
     marginTop: 20,
@@ -20,9 +23,6 @@ export default StyleSheet.create({
   appBarTitle: {
     fontFamily: 'Poppins-Bold',
     fontSize: 36,
-    color: 'black',
-  },
-  textinit: {
     color: 'black',
   },
   makeColumn: {

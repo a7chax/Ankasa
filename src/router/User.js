@@ -5,6 +5,7 @@ import {
   DetailBooking,
   SearchFlight,
   SearchResult,
+  FlightDetail,
 } from '../screen/';
 import Home from './Home';
 
@@ -18,6 +19,7 @@ function User() {
       <Stack.Screen name="SearchResult" component={SearchResult} />
       <Stack.Screen name="SearchFlight" component={SearchFlight} />
       <Stack.Screen name="DetailBooking" component={DetailBooking} />
+      <Stack.Screen name="FlightDetail" component={FlightDetail} />
     </Stack.Navigator>
   );
 }
