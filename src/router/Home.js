@@ -1,6 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Profile} from '../screen';
+import {Profile, Explore} from '../screen';
 
 import Icons from 'react-native-vector-icons/Ionicons';
 import {View} from 'react-native';
@@ -23,7 +23,7 @@ function Home() {
       }}>
       <Tab.Screen
         name="Booking"
-        component={Profile}
+        component={Explore}
         options={{
           tabBarLabel: 'My Booking',
           tabBarIcon: ({color}) => (
@@ -34,7 +34,7 @@ function Home() {
 
       <Tab.Screen
         name="Explore"
-        component={Profile}
+        component={Explore}
         options={{
           tabBarLabel: '',
           tabBarIcon: () => (
