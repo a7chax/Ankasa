@@ -1,6 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Explore} from '../screen';
+import {Profile, Explore} from '../screen';
 
 import Icons from 'react-native-vector-icons/Ionicons';
 import {View} from 'react-native';
@@ -57,7 +57,7 @@ function Home() {
 
       <Tab.Screen
         name="Profile"
-        component={Explore}
+        component={Profile}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({color}) => (
