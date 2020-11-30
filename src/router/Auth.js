@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 
 function Auth() {
   return (
-    <Stack.Navigator initialRouteName="ForgotPassword" headerMode>
+    <Stack.Navigator initialRouteName="Welcome" headerMode>
       <Stack.Screen name="Welcome" component={Welcome} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
