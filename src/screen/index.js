@@ -6,6 +6,7 @@ import Explore from './home/HomeExplore';
 import MyBooking from './home/MyBooking';
 import LoginFingerprint from './auth/LoginFingerprint';
 import ForgotPassword from './auth/ForgotPassword';
+import Notification from './home/Notification/'
 
 export {
   Login,
@@ -15,5 +16,6 @@ export {
   ForgotPassword,
   Explore,
   Profile,
-  MyBooking,
+	MyBooking,
+	Notification
 };
