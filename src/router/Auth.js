@@ -6,13 +6,15 @@ import {
   Register,
   LoginFingerprint,
   ForgotPassword,
+  SearchResult
 } from '../screen';
 
 const Stack = createStackNavigator();
 
 function Auth() {
   return (
-    <Stack.Navigator initialRouteName="Welcome" headerMode>
+    <Stack.Navigator initialRouteName="SearchResult" headerMode>
+      <Stack.Screen name="SearchResult" component={SearchResult} />
       <Stack.Screen name="Welcome" component={Welcome} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
