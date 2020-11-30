@@ -21,6 +21,7 @@
     "react-native-fingerprint-scanner": "^6.0.0",
     "react-native-gesture-handler": "^1.9.0",
     "react-native-paper": "^4.4.1",
+    "react-native-ratings": "^7.3.0",
     "react-native-reanimated": "^1.13.2",
     "react-native-responsive-fontsize": "^0.5.0",
     "react-native-responsive-screen": "^1.4.1",

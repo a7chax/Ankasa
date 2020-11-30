@@ -10,7 +10,7 @@ export default StyleSheet.create({
 		flexDirection : 'column',
 		alignItems : 'center',
 		alignSelf : 'stretch'
-	},	
+	},
 	boxTicket : {
 		marginBottom : 15,
 	    height:hp(36),
@@ -21,7 +21,7 @@ export default StyleSheet.create({
 	    shadowColor: '#000',
 	    shadowOffset: { width: 0, height: 2 },
 	    shadowOpacity: 0.5,
-	    shadowRadius: 5, 
+	    shadowRadius: 5,
 	},
 	dateTicket : {
 		fontFamily : 'Poppins-Regular',
@@ -31,7 +31,7 @@ export default StyleSheet.create({
 		color : '#000000'
 	},
 	ineerCardPos : {
-		flex : 1, 
+		flex : 1,
 		flexDirection : 'column',
 		marginHorizontal : 21,
 		marginVertical : 20,
@@ -52,7 +52,7 @@ export default StyleSheet.create({
 		paddingTop : 20
 	},
 	statusPostion :{
-		flexDirection : 'row', 
+		flexDirection : 'row',
 		justifyContent : 'space-between',
 		marginHorizontal : 20,
 	},
@@ -60,10 +60,10 @@ export default StyleSheet.create({
 		fontFamily : 'Poppins-SemiBold',
 		fontSize : 14,
 		lineHeight : 39,
-		color : '#7A7A7A',		
+		color : '#7A7A7A',
 	},
 	boxStatus : {
-		backgroundColor : '#FF7F23',	
+		backgroundColor : '#FF7F23',
 		borderRadius : 6
 	},
 	statusDesc : {

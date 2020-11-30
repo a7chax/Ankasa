@@ -4,6 +4,7 @@ import ForgotPassword from './auth/ForgotPassword'
 import MyBooking from './user/MyBooking/'
 import Notification from './user/Notification/'
 import DetailBooking from './user/DetailBooking/'
+import FlightDetail from './user/FlightDetail'
 
 export {
 	Login,
@@ -11,5 +12,6 @@ export {
 	ForgotPassword,
 	MyBooking,
 	Notification,
-	DetailBooking
+	DetailBooking,
+	FlightDetail
 }
