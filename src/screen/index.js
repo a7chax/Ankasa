@@ -12,6 +12,7 @@ import Notification from './home/Notification/';
 import DetailBooking from './home/DetailBooking/';
 import FlightDetail from './home/FlightDetail';
 import EditProfile from './home/EditProfile';
+import Chat from './home/Chat';
 
 export {
   Login,
@@ -27,5 +28,6 @@ export {
   SearchFlight,
   SearchResult,
   FlightDetail,
-  EditProfile
+  EditProfile,
+  Chat,
 };
