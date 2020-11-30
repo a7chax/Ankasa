@@ -7,11 +7,13 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
-import {Button, Checkbox} from 'react-native-paper';
-import {ButtonWelcome, ButtonSignIn, ButtonSignUp} from '../../../components';
+import {Checkbox} from 'react-native-paper';
+import {ButtonSignUp} from '../../../components';
+import {AuthRegister} from '../../../redux/actions/Auth';
 
-const Register = (props) => {
+const Register = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
   const [checked, setChecked] = React.useState(false);
   const [username, setUsername] = React.useState('');
@@ -21,6 +23,25 @@ const Register = (props) => {
   const [secure, setSecure] = React.useState(true);
   const inputEmail = React.useRef();
   const inputPassword = React.useRef();
+
+  const submitRegister = () => {
+    if (!checked)
+      return ToastAndroid.show(
+        'you must accept terms and condition',
+        ToastAndroid.SHORT,
+      );
+    else if (loading) return false;
+
+    setLoading(true);
+    const data = {username, email, password};
+    const callbackHandler = (err) => {
+      setLoading(false);
+
+      if (err) return false;
+      navigation.pop();
+    };
+    AuthRegister(data, callbackHandler);
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -85,9 +106,9 @@ const Register = (props) => {
             fontFamily="Poppins-SemiBold"
             title="Sign Up"
             mode="contained"
-            disabled={loading}
-            loading={loading}
-            onPress={() => props.navigation.navigate('Login')}
+            disabled={checked || loading}
+            loading={checked || loading}
+            onPress={submitRegister}
           />
         </View>
       </View>

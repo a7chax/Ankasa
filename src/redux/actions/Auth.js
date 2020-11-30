@@ -1,42 +1,41 @@
-import Axios from 'axios'
-import {API_URI} from '../../../env.js'
+import axios from '../../helpers/axios';
+import {ToastAndroid} from 'react-native';
 
+const handleError = (error) => {
+  console.log(error);
+  if (error.response) {
+    return ToastAndroid.show(error.response.data.msg, ToastAndroid.LONG);
+  }
+  return ToastAndroid.show('Connection Refused', ToastAndroid.LONG);
+};
 
-export const AuthLoginRequest = ()=> {
-    return{
-        type: 'LOGIN_REQUEST'
-    }
-}
+const AuthLogin = (token, data, callback) => (dispatch) => {
+  axios
+    .post('/auth/login', data, {
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
+    .then((response) => {
+      callback(false, response); // isError, response
+      return dispatch({type: 'AUTHLOGIN', payload: response.data.data.token});
+    })
+    .catch((error) => {
+      callback(true, error); // isError, response
+      return handleError(error);
+    });
+};
 
-export const AuthRegisterRequest = () => {
-    return {
-        type : 'REGISTER_REQUEST'
-    }
-}
+const AuthRegister = (data, callback) => {
+  axios
+    .post('/auth/register', data)
+    .then((response) => {
+      callback(false, response); // isError, response
+    })
+    .catch((error) => {
+      callback(true, error); // isError, response
+      return handleError(error);
+    });
+};
 
-export const AuthRegisterSuccess = (data) => {
-    return {
-        type : 'REGISTER_SUCCESS',
-        payload : data
-    }
-}
-
-export const AuthRegisterFailed = (error) => {
-    return {
-        type : 'REGISTER_FAILED',
-        payload : error
-    }
-}
-
-export const AuthLoginError = (error)=> {
-    return{
-        type: 'LOGIN_ERROR',
-        payload: error
-    }
-}
-
-export const AuthLogout = ()=> {
-    return{
-        type: 'LOGOUT',
-    }
-}
+export {AuthLogin, AuthRegister};

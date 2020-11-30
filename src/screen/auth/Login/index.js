@@ -8,16 +8,32 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+
 import {Button} from 'react-native-paper';
 import {ButtonWelcome, ButtonSignIn, ButtonSignUp} from '../../../components';
+import {useDispatch} from 'react-redux';
+import {AuthLogin} from '../../../redux/actions/Auth';
 
-const Login = (props) => {
+const Login = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [secure, setSecure] = React.useState(true);
 
   const inputPassword = React.useRef();
+  const dispatch = useDispatch();
+
+  const submitLogin = () => {
+    setLoading(true);
+    const data = {email, password};
+    const callbackHandler = (err) => {
+      setLoading(false);
+
+      if (err) return false;
+      navigation.replace('User');
+    };
+    dispatch(AuthLogin(data, callbackHandler));
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -68,7 +84,7 @@ const Login = (props) => {
             mode="contained"
             disabled={loading}
             loading={loading}
-            onPress={() => props.navigation.navigate('Register')}
+            onPress={submitLogin}
           />
         </View>
 

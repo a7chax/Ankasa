@@ -1,48 +1,27 @@
 const initalState = {
-	token : '',
-	loading : false,
-	data : [],
-	error : ''
-}
+  token: '',
+  isLogin: false,
+};
 
+const Auth = (state = initalState, action = {}) => {
+  switch (action.type) {
+    case 'AUTHLOGIN':
+      return {
+        ...state,
+        token: action.payload,
+        isLogin: true,
+      };
 
-const Auth = (state = initalState, action  = {})  => {
-	switch(action.type){
-	  case 'LOGIN_REQUEST':
-	    return {
-	      ...state,
-	      loading: true,
-	    };
-	  case 'LOGIN_SUCCESS':
-	    return {
-	      ...state,
-	      loading: false,
-	      isLogin: true,
-	      token: action.payload
-	    };
-	  case 'LOGIN_ERROR':
-	    return {
-	      ...state,
-	      loading: false,
-	      isLogin: false,
-	      token:'',
-	      error: action.payload
-	    };
-	  case 'LOGOUT':
-	    return {
-	      ...state,
-	      loading: false,
-	      isLogin: false,
-	      token: '',
-	      _persist: {
-	        rehydrated: true,
-	        version: -1
-	      }
-	    };
-	  default :
-	  	return state
+    case 'AUTHLOGOUT':
+      return {
+        ...state,
+        token: '',
+        isLogin: false,
+      };
 
-	}
-}
+    default:
+      return state;
+  }
+};
 
-  export default Auth;
+export default Auth;
