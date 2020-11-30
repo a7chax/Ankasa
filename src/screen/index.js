@@ -3,7 +3,17 @@ import Register from './auth/Register';
 import Welcome from './auth/Welcome';
 import Profile from './home/HomeProfile';
 import Explore from './home/HomeExplore';
+import MyBooking from './home/MyBooking';
 import LoginFingerprint from './auth/LoginFingerprint';
 import ForgotPassword from './auth/ForgotPassword';
 
-export {Login, Register, Welcome, LoginFingerprint, ForgotPassword, Explore, Profile};
+export {
+  Login,
+  Register,
+  Welcome,
+  LoginFingerprint,
+  ForgotPassword,
+  Explore,
+  Profile,
+  MyBooking,
+};
