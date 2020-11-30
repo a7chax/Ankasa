@@ -6,6 +6,7 @@ import {
   SearchFlight,
   SearchResult,
   FlightDetail,
+  EditProfile
 } from '../screen/';
 import Home from './Home';
 
@@ -20,6 +21,8 @@ function User() {
       <Stack.Screen name="SearchFlight" component={SearchFlight} />
       <Stack.Screen name="DetailBooking" component={DetailBooking} />
       <Stack.Screen name="FlightDetail" component={FlightDetail} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
+    
     </Stack.Navigator>
   );
 }

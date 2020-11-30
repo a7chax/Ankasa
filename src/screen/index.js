@@ -11,6 +11,7 @@ import ForgotPassword from './auth/ForgotPassword';
 import Notification from './home/Notification/';
 import DetailBooking from './home/DetailBooking/';
 import FlightDetail from './home/FlightDetail';
+import EditProfile from './home/EditProfile';
 
 export {
   Login,
@@ -26,4 +27,5 @@ export {
   SearchFlight,
   SearchResult,
   FlightDetail,
+  EditProfile
 };
