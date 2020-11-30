@@ -1,17 +1,17 @@
 import React,{useState} from 'react'
 import {View, Text, TouchableNativeFeedback} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import styles from './navigation.style.js'
+import styles from './navigationwhite.style.js'
 
 
-function Navigation(props){
+function NavigationWhite(props){
 	const {onPress, pageTitle, pageTitleEvent} = props
 
 	return(
 		<View style={styles.navigateDis}>
 			<View>
 				<TouchableNativeFeedback onPress={onPress}>
-			 		<Icon name="chevron-left" size={25} color="black" />
+			 		<Icon name="chevron-left" size={25} color="#FFFFFF" />
 			 	</TouchableNativeFeedback>
 			</View>
 
@@ -24,4 +24,4 @@ function Navigation(props){
 	)
 }
 
-export default Navigation
+export default NavigationWhite
