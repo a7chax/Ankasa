@@ -9,11 +9,12 @@ const handleError = (error) => {
     return ToastAndroid.show('Connection Refused', ToastAndroid.LONG);
 };
 
-const GetDetailFlight = (id, callback) => {
-    axios.get(`/public/classes/5`, data)
+
+const GetDetailFlight = (id = 5 , callback) => (dispatch) => {
+    axios.get(`/public/classes/${id}`)
     .then(res=>{
-        console.log(res, 'ress')
         callback(false, res);
+        console.log(1)
         return dispatch({
             type: 'GET_DETAIL_FLIGHT',
             payload: res.data.data

@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 
 function User() {
   return (
-    <Stack.Navigator initialRouteName="FlightDetail" headerMode>
+    <Stack.Navigator initialRouteName="EditProfile" headerMode>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Notification" component={Notification} />
       <Stack.Screen name="SearchResult" component={SearchResult} />
