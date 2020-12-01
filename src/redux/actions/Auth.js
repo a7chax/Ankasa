@@ -9,13 +9,9 @@ const handleError = (error) => {
   return ToastAndroid.show('Connection Refused', ToastAndroid.LONG);
 };
 
-const AuthLogin = (token, data, callback) => (dispatch) => {
+const AuthLogin = (data, callback) => (dispatch) => {
   axios
-    .post('/auth/login', data, {
-      headers: {
-        authorization: 'Bearer ' + token,
-      },
-    })
+    .post('/auth/login', data)
     .then((response) => {
       callback(false, response); // isError, response
       return dispatch({type: 'AUTHLOGIN', payload: response.data.data.token});
