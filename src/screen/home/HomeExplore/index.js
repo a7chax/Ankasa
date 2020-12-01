@@ -14,7 +14,7 @@ import Carousel from 'react-native-snap-carousel';
 import {useSelector, useDispatch} from 'react-redux';
 import {getDestination} from '../../../redux/actions/Destination';
 import {ActivityIndicator} from 'react-native-paper';
-import {UserDetail} from '../../../redux/actions/Auth';
+import {GetProfile} from '../../../redux/actions/Profiles';
 
 const {width} = Dimensions.get('screen');
 
@@ -26,18 +26,18 @@ const HomeExplore = (props) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    LoadDestination();
+    LoadProfile();
   }, []);
 
-  // const LoadProfile = () => {
-  //   const callbackHandler = (err, res) => {
-  //     if (err) setLoading(false);
+  const LoadProfile = () => {
+    const callbackHandler = (err, res) => {
+      if (err) setLoading(false);
 
-  //     return LoadDestination();
-  //   };
+      return LoadDestination();
+    };
 
-  //   dispatch(UserDetail(token, callbackHandler));
-  // };
+    dispatch(GetProfile(token, callbackHandler));
+  };
 
   const LoadDestination = () => {
     const callbackHandler = (err, res) => {
@@ -142,6 +142,7 @@ const HomeExplore = (props) => {
       <ScrollView horizontal>
         {destination.map((item, index) => (
           <TouchableOpacity
+            key={index}
             onPress={() => props.navigation.navigate('SearchFlight', item)}
             style={{marginBottom: 10, marginHorizontal: 5}}>
             <View
