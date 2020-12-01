@@ -9,12 +9,14 @@ const handleError = (error) => {
   return ToastAndroid.show('Connection Refused', ToastAndroid.LONG);
 };
 
-const AuthLogin = (data, callback) => (dispatch) => {
+const getDestination = (data, callback) => (dispatch) => {
+  let {offset, limit} = data;
+  offset = offset ? offset : 1;
   axios
-    .post('/auth/login', data)
+    .get(`/public/destination?limit=${limit}&offset=${offset}`)
     .then((response) => {
       callback(false, response); // isError, response
-      return dispatch({type: 'AUTHLOGIN', payload: response.data.data.token});
+      return dispatch({type: 'SETDESTINATION', payload: response.data.data});
     })
     .catch((error) => {
       callback(true, error); // isError, response
@@ -22,16 +24,4 @@ const AuthLogin = (data, callback) => (dispatch) => {
     });
 };
 
-const AuthRegister = (data, callback) => {
-  axios
-    .post('/auth/register', data)
-    .then((response) => {
-      callback(false, response); // isError, response
-    })
-    .catch((error) => {
-      callback(true, error); // isError, response
-      return handleError(error);
-    });
-};
-
-export {AuthLogin, AuthRegister};
+export {getDestination};

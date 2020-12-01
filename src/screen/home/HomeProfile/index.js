@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,20 +8,53 @@ import {
   Dimensions,
   Image,
   ScrollView,
+  StatusBar,
 } from 'react-native';
 import Icons from 'react-native-vector-icons/Feather';
 import Icons2 from 'react-native-vector-icons/FontAwesome';
 import Carousel from 'react-native-snap-carousel';
+import {useSelector, useDispatch} from 'react-redux';
+import {GetProfile} from '../../../redux/actions/Profiles';
 
 const {width} = Dimensions.get('screen');
 
-const HomeProfile = () => {
+const HomeProfile = (props) => {
+  const {data} = useSelector((s) => s.Profiles);
+  const {token} = useSelector((s) => s.Auth);
+  const [loading, setLoading] = useState(true);
+  const {username, city} = data;
+  const dispatch = useDispatch();
+
+
+
+  const gotoEditProfile = () => {
+    props.navigation.navigate('EditProfile')
+  }
+
+  React.useEffect(() => {
+    const callbackHandler = (err) => {
+      setLoading(false);
+
+      if (err) return false;
+      // navigation.replace('HomeProfile');
+    };
+    dispatch(GetProfile(token, callbackHandler));
+    return () => {
+      
+    }
+  }, []);
+
+  const onLogout = () => {
+    dispatch({type: 'AUTHLOGOUT'});
+    navigation.replace('Auth');
+  };
+
   const AppBar = () => (
     <View style={[styles.appBar]}>
       <Text style={[styles.appBarTitle]}>Profile</Text>
 
       <View style={[styles.appBarRight]}>
-        <TouchableOpacity activeOpacity={0.6}>
+        <TouchableOpacity activeOpacity={0.6} onPress={() => gotoEditProfile()}>
           <Text style={[styles.title, {color: '#2395FF', fontSize: 18}]}>
             Edit
           </Text>
@@ -53,11 +86,11 @@ const HomeProfile = () => {
       </View>
 
       <Text style={[styles.title, {fontSize: 20, color: 'black'}]}>
-        Mike Kowalski
+        {username}
       </Text>
 
       <Text style={{fontFamily: 'Poppins-Regular', fontSize: 14}}>
-        Medan, Indonesia
+        {city}, Indonesia
       </Text>
     </View>
   );
@@ -157,7 +190,8 @@ const HomeProfile = () => {
             marginVertical: 2,
             flexDirection: 'row',
             alignItems: 'center',
-          }}>
+          }}
+          onPress={onLogout}>
           <Icons2 name="sign-out" size={24} color="#F24545" />
           <Text
             style={{
@@ -190,7 +224,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 28,
   },
   appBar: {
-    marginTop: 20,
+    marginTop: 20 + StatusBar.currentHeight,
     marginBottom: 5,
     flexDirection: 'row',
     alignItems: 'center',

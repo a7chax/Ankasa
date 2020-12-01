@@ -1,5 +1,8 @@
 import axios from '../../helpers/axios';
+import AxiosBase from 'axios';
 import {ToastAndroid} from 'react-native';
+import {API_URI, API_URL} from '../../../env';
+import {Header} from 'react-native/Libraries/NewAppScreen';
 
 const handleError = (error) => {
   console.log(error);
@@ -9,12 +12,15 @@ const handleError = (error) => {
   return ToastAndroid.show('Connection Refused', ToastAndroid.LONG);
 };
 
-const AuthLogin = (data, callback) => (dispatch) => {
-  axios
-    .post('/auth/login', data)
+const GetMyBooking = (token, callback) => (dispatch) => {
+  AxiosBase.get(`${API_URI}/users/transactions`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
     .then((response) => {
       callback(false, response); // isError, response
-      return dispatch({type: 'AUTHLOGIN', payload: response.data.data.token});
+      return dispatch({type: 'GETMYBOOKING', payload: response.data.data});
     })
     .catch((error) => {
       callback(true, error); // isError, response
@@ -22,16 +28,4 @@ const AuthLogin = (data, callback) => (dispatch) => {
     });
 };
 
-const AuthRegister = (data, callback) => {
-  axios
-    .post('/auth/register', data)
-    .then((response) => {
-      callback(false, response); // isError, response
-    })
-    .catch((error) => {
-      callback(true, error); // isError, response
-      return handleError(error);
-    });
-};
-
-export {AuthLogin, AuthRegister};
+export {GetMyBooking};

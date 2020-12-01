@@ -8,7 +8,8 @@ import {
   FlightDetail,
   EditProfile,
   Chat,
-} from '../screen';
+  MyBooking,
+} from '../screen/';
 import Home from './Home';
 
 const Stack = createStackNavigator();
@@ -24,6 +25,7 @@ function User() {
       <Stack.Screen name="FlightDetail" component={FlightDetail} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="Chat" component={Chat} />
+      <Stack.Screen name="MyBooking" component={MyBooking} />
     </Stack.Navigator>
   );
 }

@@ -8,13 +8,63 @@ import {
   Dimensions,
   Image,
   ScrollView,
+  StatusBar,
 } from 'react-native';
 import Icons from 'react-native-vector-icons/Feather';
 import Carousel from 'react-native-snap-carousel';
+import {useSelector, useDispatch} from 'react-redux';
+import {getDestination} from '../../../redux/actions/Destination';
+import {ActivityIndicator} from 'react-native-paper';
+import {GetProfile} from '../../../redux/actions/Profiles';
 
 const {width} = Dimensions.get('screen');
 
-const HomeExplore = () => {
+const HomeExplore = (props) => {
+  const [loading, setLoading] = React.useState(true);
+
+  const {token} = useSelector((state) => state.Auth);
+  const {destination} = useSelector((state) => state.Destination);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    LoadProfile();
+  }, []);
+
+  const LoadProfile = () => {
+    const callbackHandler = (err, res) => {
+      if (err) setLoading(false);
+
+      return LoadDestination();
+    };
+
+    dispatch(GetProfile(token, callbackHandler));
+  };
+
+  const LoadDestination = () => {
+    const callbackHandler = (err, res) => {
+      setLoading(false);
+
+      if (err) return false;
+    };
+
+    const data = {limit: 10};
+    dispatch(getDestination(data, callbackHandler));
+  };
+
+  if (loading) {
+    return (
+      <View
+        style={{
+          justifyContent: 'center',
+          flex: 1,
+          alignItems: 'center',
+          backgroundColor: 'white',
+        }}>
+        <ActivityIndicator size="small" color="#2395FF" />
+      </View>
+    );
+  }
+
   const AppBar = () => (
     <View style={[styles.appBar]}>
       <Text style={[styles.appBarTitle]}>Explore</Text>
@@ -41,14 +91,21 @@ const HomeExplore = () => {
     </View>
   );
 
+  const gotoSearch = () => {
+    props.navigation.push('SearchFlight');
+  };
+
   const SearchBox = () => (
     <View style={[styles.searchBox]}>
       <Icons name="search" size={28} color="#A3A3A3" />
-      <TextInput
-        onChangeText={(text) => console.log(text)}
-        placeholder="Where you want to go?"
-        style={{width: '91%', marginLeft: 8}}
-      />
+      <TouchableOpacity onPress={() => gotoSearch()}>
+        <TextInput
+          editable={false}
+          onChangeText={(text) => console.log(text)}
+          placeholder="Where you want to go?"
+          style={{width: '91%', marginLeft: 8}}
+        />
+      </TouchableOpacity>
     </View>
   );
 
@@ -73,7 +130,7 @@ const HomeExplore = () => {
         style={{width: '100%'}}
         layout="stack"
         layoutCardOffset={24}
-        data={[1, 2, 3]}
+        data={destination}
         centerContent={true}
         renderItem={_renderCarousel}
         renderToHardwareTextureAndroid={true}
@@ -97,37 +154,43 @@ const HomeExplore = () => {
       </View>
 
       <ScrollView horizontal>
-        <View style={{marginBottom: 10}}>
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: 85,
-              width: 85,
-              marginBottom: 4,
-              borderWidth: 4,
-              borderColor: '#2395FF',
-              borderRadius: 50,
-            }}>
-            <Image
-              source={{
-                uri:
-                  'https://images.unsplash.com/photo-1542931287-023b922fa89b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8N3x8dG9reW98ZW58MHx8MHw%3D&auto=format&fit=crop&w=500&q=60',
-              }}
-              style={{width: 70, height: 70, borderRadius: 50}}
-            />
-          </View>
+        {destination.map((item, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => props.navigation.navigate('SearchFlight', item)}
+            style={{marginBottom: 10, marginHorizontal: 5}}>
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: 85,
+                width: 85,
+                marginBottom: 4,
+                borderWidth: 4,
+                borderColor: '#2395FF',
+                borderRadius: 50,
+              }}>
+              <Image
+                source={{
+                  uri:
+                    item.photo ??
+                    'https://images.unsplash.com/photo-1542931287-023b922fa89b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8N3x8dG9reW98ZW58MHx8MHw%3D&auto=format&fit=crop&w=500&q=60',
+                }}
+                style={{width: 70, height: 70, borderRadius: 50}}
+              />
+            </View>
 
-          <Text
-            style={{
-              fontFamily: 'Poppins-Regular',
-              fontSize: 16,
-              textAlign: 'center',
-              color: 'black',
-            }}>
-            BALI
-          </Text>
-        </View>
+            <Text
+              style={{
+                fontFamily: 'Poppins-Regular',
+                fontSize: 16,
+                textAlign: 'center',
+                color: 'black',
+              }}>
+              {item.city}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </ScrollView>
     </>
   );
@@ -138,17 +201,19 @@ const HomeExplore = () => {
         <Image
           source={{
             uri:
+              item.photo ??
               'https://images.unsplash.com/photo-1542931287-023b922fa89b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8N3x8dG9reW98ZW58MHx8MHw%3D&auto=format&fit=crop&w=500&q=60',
           }}
           style={{width: '100%', height: width / 2, borderRadius: 20}}
         />
 
         <View style={{marginTop: 18}}>
-          <Text style={[styles.cardTitle(14)]}>Tokyo, </Text>
+          <Text style={[styles.cardTitle(14)]}>{item.city}, </Text>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <Text style={[styles.cardTitle(24)]}>Japan</Text>
+            <Text style={[styles.cardTitle(24)]}>{item.name}</Text>
             <TouchableOpacity
               activeOpacity={0.6}
+              onPress={() => props.navigation.navigate('SearchFlight', item)}
               style={{
                 backgroundColor: 'rgba(35, 149, 255, 0.1)',
                 padding: 8,
@@ -180,7 +245,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 28,
   },
   appBar: {
-    marginTop: 20,
+    marginTop: 20 + StatusBar.currentHeight,
     marginBottom: 5,
     flexDirection: 'row',
     alignItems: 'center',
