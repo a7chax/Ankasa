@@ -17,7 +17,7 @@ import {Facilities} from '../../../components'
 
 
 
-function FlightDetail(){
+function FlightDetail(props){
 
 	useEffect(() => {
     StatusBar.setBarStyle("light-content");

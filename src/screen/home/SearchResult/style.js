@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
         right: 0,
         marginTop: 30,
         position: 'absolute',
-        width: 70,
+        width: '50%',
+        height : '16%',
         borderRadius: 6,
         padding: '2%',
 
@@ -57,6 +58,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontFamily: 'Poppins-SemiBold',
         marginRight: '5%',
+        lineHeight : 40,
         right: 0,
         marginTop: 30,
     },
