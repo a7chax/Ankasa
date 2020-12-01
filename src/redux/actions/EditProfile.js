@@ -1,5 +1,7 @@
 import axios from '../../helpers/axios';
 import { ToastAndroid } from 'react-native';
+import Axios from 'axios'
+import {API_URI} from '../../../env.js'
 
 const handleError = (error) => {
     console.log(error);
@@ -9,17 +11,14 @@ const handleError = (error) => {
     return ToastAndroid.show('Connection Refused', ToastAndroid.LONG);
 };
 
-const EditProfiles = (data, callback) => (dispatch) => {
-    axios
-        .patch('/users/edit', data)
-        .then((response) => {
-            callback(false, response);
-            return dispatch({ type: 'PATCHPROFILE', payload: response.data.data });
-        })
-        .catch((error) => {
-            callback(true, error);
-            return handleError(error);
-        });
-};
+export const editProfile = (data, token) => async dispatch => {
+    try{
+        const header = { headers: {
+                'Authorization': `Bearer ${token}`,
+            }}
+        const res = await Axios.patch(`${API_URI}/users/edit`,data, header)
+    }catch(error){
+        dispatch({type : 'FAILED_EDIT_USER', payload : error})
+    }
+}
 
-export {EditProfiles}

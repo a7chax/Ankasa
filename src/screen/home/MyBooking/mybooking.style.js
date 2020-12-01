@@ -32,7 +32,7 @@ export default StyleSheet.create({
   },
   boxTicket: {
     marginBottom: 15,
-    height: hp(36),
+    height: hp(27),
     width: wp(90),
     backgroundColor: 'white',
     borderRadius: 15,

@@ -18,12 +18,18 @@ import {GetProfile} from '../../../redux/actions/Profiles';
 
 const {width} = Dimensions.get('screen');
 
-const HomeProfile = ({navigation}) => {
+const HomeProfile = (props) => {
   const {data} = useSelector((s) => s.Profiles);
   const {token} = useSelector((s) => s.Auth);
   const [loading, setLoading] = useState(true);
   const {username, city} = data;
   const dispatch = useDispatch();
+
+
+
+  const gotoEditProfile = () => {
+    props.navigation.navigate('EditProfile')
+  }
 
   React.useEffect(() => {
     const callbackHandler = (err) => {
@@ -31,10 +37,12 @@ const HomeProfile = ({navigation}) => {
 
       if (err) return false;
       // navigation.replace('HomeProfile');
-      console.log(data);
-      console.log('data');
     };
     dispatch(GetProfile(token, callbackHandler));
+
+    return () => {
+      
+    }
   }, []);
 
   const onLogout = () => {
@@ -47,7 +55,7 @@ const HomeProfile = ({navigation}) => {
       <Text style={[styles.appBarTitle]}>Profile</Text>
 
       <View style={[styles.appBarRight]}>
-        <TouchableOpacity activeOpacity={0.6}>
+        <TouchableOpacity activeOpacity={0.6} onPress={() => gotoEditProfile()}>
           <Text style={[styles.title, {color: '#2395FF', fontSize: 18}]}>
             Edit
           </Text>

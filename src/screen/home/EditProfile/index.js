@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,15 +8,68 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native'; 
-import { EditProfiles} from '../../../redux/actions/EditProfile'
+import {GetProfile} from '../../../redux/actions/Profiles';
+import {useSelector, useDispatch} from 'react-redux';
+import {editProfile} from '../../../redux/actions/EditProfile'
 
-const EditProfile = () => {
-  const [data, setData] = React.useState({
-    username: '',
-    postcode: '',
-    address: '',
-    id_city: '',
-  })
+
+const EditProfile = (props) => {
+    const [phoneNumber, setPhoneNumber] = useState([])
+    const [email, setEmail] = useState([])
+    const [username, setUsername] = useState([])
+    const [city, setCity] = useState([])
+    const [address, setAddress] = useState([])
+    const [postcode, setPostcode] = useState([])
+
+
+    const dispatch = useDispatch();
+    const {token} = useSelector((s) => s.Auth);
+    const {data} = useSelector((s) => s.Profiles);
+
+    const submitEdit = () => {
+      let data = {
+        username : username,
+        postcode : postcode,
+        address: address
+      }
+
+      dispatch(editProfile(data, token  ))
+      props.navigation.goBack('Profile')
+
+      const callbackHandler = (err) => {
+        
+
+        if (err) return false;
+        // navigation.replace('HomeProfile');
+      };
+      dispatch(GetProfile(token, callbackHandler));         
+    }
+
+
+
+    useEffect(() => {
+    const callbackHandler = (err) => {
+
+      if (err) return false;
+      // navigation.replace('HomeProfile');
+    };
+    dispatch(GetProfile(token, callbackHandler));      
+
+
+    console.log('data edit profile',data)
+
+    setPhoneNumber(data.phone)
+    setEmail(data.email)
+    setUsername(data.username)
+    setCity(data.city)
+    setAddress(data.address)
+    setPostcode(data.postcode)
+
+
+
+
+    }, [])
+
 
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
@@ -60,11 +113,13 @@ const EditProfile = () => {
           Email
         </Text>
         <View style={styles.inputItem}>
-          <TextInput
-            style={{width: '90%'}}
-            placeholder="example@gmail.com"
+          <TextInput          
+            editable={false}            
+            value={email}  
+            style={{width: '90%', color : 'gray'}}
             autoCapitalize={'none'}
             returnKeyType="next"
+            onChangeText={(text) => setEmail(text)}          
           />
         </View>
       </View>
@@ -76,10 +131,12 @@ const EditProfile = () => {
         </Text>
         <View style={styles.inputItem}>
           <TextInput
+            value={phoneNumber}
             style={{width: '90%'}}
             placeholder="+62"
             autoCapitalize={'none'}
             returnKeyType="next"
+            onChangeText={(text) => setPhoneNumber(text)}          
           />
         </View>
       </View>
@@ -98,9 +155,10 @@ const EditProfile = () => {
         </Text>
         <View style={styles.inputItem}>
           <TextInput
+            value={username}
             style={{width: '90%'}}
-            placeholder="Mike"
             autoCapitalize={'none'}
+            onChangeText={(text) => setUsername(text)}          
             returnKeyType="next"
           />
         </View>
@@ -113,10 +171,11 @@ const EditProfile = () => {
         </Text>
         <View style={styles.inputItem}>
           <TextInput
-            style={{width: '90%'}}
-            placeholder="Medan"
+            editable={false}
+            value={city}
+            style={{width: '90%', color : 'gray'}}
             autoCapitalize={'none'}
-            // onChangeText={(text) => setPassword(text)}
+            onChangeText={(text) => setCity(text)}
             returnKeyType="next"
 
             // underlineColorAndroid="#fff"
@@ -132,9 +191,11 @@ const EditProfile = () => {
         </Text>
         <View style={styles.inputItem}>
           <TextInput
+            value={address}
             style={{width: '90%'}}
             placeholder="Medan"
             autoCapitalize={'none'}
+            onChangeText={(text) => setAddress(text)}
             returnKeyType="done"
           />
         </View>
@@ -146,10 +207,11 @@ const EditProfile = () => {
         </Text>
         <View style={styles.inputItem}>
           <TextInput
+            value={postcode}
             style={{width: '90%'}}
             placeholder="5555"
             autoCapitalize={'none'}
-            // onChangeText={(text) => setPassword(text)}
+            onChangeText={(text) => setPostcode(text)}
             returnKeyType="done"
 
             // underlineColorAndroid="#fff"
@@ -160,7 +222,7 @@ const EditProfile = () => {
 
       <View style={{backgroundColor: '#fff', padding: 25, paddingBottom: 30}}>
         <View style={{width: '50%', position: 'absolute', right: '0%'}}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => submitEdit()}>
             <Text
               style={styles.button}>
               Save
