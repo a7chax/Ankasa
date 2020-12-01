@@ -39,7 +39,6 @@ const HomeProfile = (props) => {
       // navigation.replace('HomeProfile');
     };
     dispatch(GetProfile(token, callbackHandler));
-
     return () => {
       
     }
