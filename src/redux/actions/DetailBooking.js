@@ -13,7 +13,7 @@ const handleError = (error) => {
 const getDetailBooking = (id, token, callback) => (dispatch) => {
   console.log(id, token);
   console.log('id, token');
-  AxiosBase.get(`${API_URI}/users/transactions/1`, {
+  AxiosBase.get(`${API_URI}/users/transactions/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

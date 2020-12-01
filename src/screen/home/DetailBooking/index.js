@@ -15,10 +15,18 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getDetailBooking} from '../../../redux/actions/DetailBooking.js';
 import moment from 'moment';
 
-function DetailBooking() {
+function DetailBooking({route, navigation}) {
+  const {id} = route.params;
   const {token} = useSelector((s) => s.Auth);
   const {data} = useSelector((s) => s.DetailBooking);
   const [loading, setLoading] = useState(true);
+  const {username, type, departure_at, gate, unique_code} = data;
+  console.log(data);
+  console.log('data di profile');
+  const [date, setDate] = useState(new Date());
+  const [imgWidth, setImgWidth] = useState('');
+  const [imgHeight, setImgHeight] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const callbackHandler = (err, res) => {
@@ -27,25 +35,8 @@ function DetailBooking() {
       if (err) return false;
       // navigation.replace('HomeProfile');
     };
-    dispatch(getDetailBooking(1, token, callbackHandler));
+    dispatch(getDetailBooking(id, token, callbackHandler));
   }, []);
-
-  const {
-    username,
-    type,
-    departure_at,
-    created_at,
-    gate,
-    unique_code,
-    from,
-    destination,
-  } = data;
-  console.log(data);
-  console.log('data di profile');
-  const [date, setDate] = useState(new Date());
-  const [imgWidth, setImgWidth] = useState('');
-  const [imgHeight, setImgHeight] = useState('');
-  const dispatch = useDispatch();
 
   function formatDateView(param) {
     const dateString = param;
@@ -56,14 +47,15 @@ function DetailBooking() {
     return momentString;
   }
 
-  const goBack = () => {};
-
   return (
     <Fragment>
       <StatusBar backgroundColor="#2395FF" />
 
       <ScrollView style={{backgroundColor: '#2395FF'}}>
-        <NavigationDotted pageTitle="Booking Pass" onPress={() => goBack()} />
+        <NavigationDotted
+          pageTitle="Booking Pass"
+          onPress={() => navigation.navigate('MyBooking')}
+        />
 
         <View style={styles.makeColumn}>
           <View style={styles.boxBooking}>
@@ -188,16 +180,15 @@ function DetailBooking() {
 
               <View style={{marginTop: 20}}>
                 <Barcode
-                  value="Hello World"
                   format="CODE128"
-                  value="1234 5678 90AS 6543 21CV"
+                  value={unique_code ? unique_code : 'No Fill'}
                   height={68}
                   width={0.95}
                 />
               </View>
 
               <View style={styles.makeColumn}>
-                <Text>1234 5678 90AS 6543 21CV</Text>
+                <Text>{unique_code ? unique_code : 'No Fill'}</Text>
               </View>
             </View>
           </View>

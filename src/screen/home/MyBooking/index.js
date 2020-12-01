@@ -10,7 +10,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {GetMyBooking} from '../../../redux/actions/MyBooking';
 import moment from 'moment';
 
-function MyBooking(props) {
+function MyBooking({navigation}) {
   const {data} = useSelector((s) => s.MyBooking);
   const {token} = useSelector((s) => s.Auth);
   const [loading, setLoading] = useState(true);
@@ -18,12 +18,11 @@ function MyBooking(props) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    
     const callbackHandler = (err) => {
       setLoading(false);
       if (err) return false;
-      console.log(data);
-      console.log('data');
+      // console.log(data);
+      // console.log('data');
     };
     dispatch(GetMyBooking(token, callbackHandler));
   }, []);
@@ -54,7 +53,6 @@ function MyBooking(props) {
     </View>
   );
 
-
   function formatDateView(param) {
     const dateString = param;
     const dateObj = new Date(dateString);
@@ -64,63 +62,68 @@ function MyBooking(props) {
     return momentString;
   }
 
-  const renderItem = ({item, index}) =>{
-    return(
+  const renderItem = ({item}) => {
+    return (
       <>
-       <TouchableOpacity 
-      onPress={(() => {props.navigation.navigate('DetailBooking', {id:item.id})})}
-      style={styles.makeColumn}>
-        <View style={styles.boxTicket}>
-          <View style={styles.ineerCardPos}>
-            <View>
-            <Text style={styles.dateTicket}>{formatDateView(item.departure_at)}</Text>
-            </View>
-
-            <View
-              style={{flexDirection: 'row', marginTop: 10, marginBottom: 6}}>
+        <View style={styles.makeColumn}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('DetailBooking', {id: item.id})}
+            style={styles.boxTicket}>
+            <View style={styles.ineerCardPos}>
               <View>
-                <Text style={styles.destinationText}>IDN</Text>
+                <Text style={styles.dateTicket}>
+                  {formatDateView(item.departure_at)}
+                </Text>
               </View>
-              <View style={{marginHorizontal: 20}}>
-                <Icon name="plane-departure" size={25} color="#979797" />
+
+              <View
+                style={{flexDirection: 'row', marginTop: 10, marginBottom: 6}}>
+                <View>
+                  <Text style={styles.destinationText}>IDN</Text>
+                </View>
+                <View style={{marginHorizontal: 20}}>
+                  <Icon name="plane-departure" size={25} color="#979797" />
+                </View>
+
+                <View>
+                  <Text style={styles.destinationText}>IDN</Text>
+                </View>
               </View>
 
               <View>
-                <Text style={styles.destinationText}>IDN</Text>
+                <Text style={styles.planeText}>
+                  Garuda Indonesia, {item.terminal}-{item.gate}
+                </Text>
               </View>
             </View>
 
-            <View>
-              <Text style={styles.planeText}>Garuda Indonesia, AB-221</Text>
-            </View>
-          </View>
+            <View style={styles.horizontalLine}></View>
 
-          <View style={styles.horizontalLine}></View>
+            <View style={styles.statusPostion}>
+              <View style={{marginVertical: 20}}>
+                <Text style={styles.textStatus}>Status</Text>
+              </View>
 
-          <View style={styles.statusPostion}>
-            <View style={{marginVertical: 20}}>
-              <Text style={styles.textStatus}>Status</Text>
-            </View>
-
-            <View style={{marginVertical: 20}}>
-              <View style={styles.boxStatus}>
-                <Text style={styles.statusDesc}>Waiting for payment</Text>
+              <View style={{marginVertical: 20}}>
+                <View style={styles.boxStatus}>
+                  <Text style={styles.statusDesc}>Waiting for payment</Text>
+                </View>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
       </>
-    )
-  }
+    );
+  };
   return (
     <View style={{backgroundColor: '#FFFFFF'}}>
       <AppBar />
 
-     <FlatList
-     data={data}
-     renderItem={renderItem}
-     />
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+      />
     </View>
   );
 }

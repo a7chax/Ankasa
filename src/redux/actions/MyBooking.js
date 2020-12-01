@@ -13,7 +13,7 @@ const handleError = (error) => {
 };
 
 const GetMyBooking = (token, callback) => (dispatch) => {
-  AxiosBase.get(`${API_URI}/transactions`, {
+  AxiosBase.get(`${API_URI}/users/transactions`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -27,7 +27,5 @@ const GetMyBooking = (token, callback) => (dispatch) => {
       return handleError(error);
     });
 };
-
-
 
 export {GetMyBooking};
