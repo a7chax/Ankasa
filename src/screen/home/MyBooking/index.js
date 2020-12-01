@@ -44,12 +44,6 @@ function MyBooking({navigation}) {
 
       <View style={[styles.appBarRight]} onPress={() => gotoChat()}>
         <TouchableOpacity activeOpacity={0.6}>
-
-      <View style={[styles.appBarRight]}>
-        <TouchableOpacity
-          onPress={() => props.navigation.navigate('Chat')}
-          activeOpacity={0.6}>
-
           <Icons
             name="mail"
             size={28}
@@ -57,9 +51,6 @@ function MyBooking({navigation}) {
             color="#595959"
           />
         </TouchableOpacity>
-
-
-        <TouchableOpacity activeOpacity={0.6} onPress={() => gotoNotif()}>
 
         <TouchableOpacity
           onPress={() => props.navigation.navigate('Notification')}

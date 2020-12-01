@@ -61,5 +61,5 @@ function Notification({navigation}){
 			</View>
 		</ScrollView>
 	)
-
+}
 export default Notification;
