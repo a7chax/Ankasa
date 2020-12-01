@@ -7,19 +7,23 @@ import {
 import styles from './notification.style.js'
 import {Navigation} from '../../../components/'
 
-function Notification(){
+function Notification({navigation}){
 
 	const clearNotification = () => {
 
 	}
 
 	const goBack = () => {
-
+		navigation.goBack()
 	}
 
 	return(
 		<ScrollView style={{backgroundColor : '#FFFFFF'}}>
-			<Navigation onPress={() => goBack()} pageTitle={'Clear'} pageTitleEvent={() => clearNotification()}/>
+
+			<View style={{marginTop : 20}}>
+				<Navigation onPress={() => goBack()} pageTitle={'Clear'} pageTitleEvent={() => clearNotification()}/>
+			</View>
+
 
 			<View style={styles.makeColumn}>
 				<View>

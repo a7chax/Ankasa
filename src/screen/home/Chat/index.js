@@ -27,7 +27,7 @@ export default function Chat() {
           </TouchableOpacity>
           {/* Profil Customer Service */}
           <View style={styles.customerService}>
-            <Image source={require('../../../assets/illustration/user.png')} style={styles.profPic} />
+            {/* <Image source={require('../../../assets/illustration/user.png')} style={styles.profPic} /> */}
             <Text style={styles.topBarText}>Customer Service</Text>
           </View>
         </View>

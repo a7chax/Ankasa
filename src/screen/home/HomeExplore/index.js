@@ -26,6 +26,14 @@ const HomeExplore = (props) => {
   const {destination} = useSelector((state) => state.Destination);
   const dispatch = useDispatch();
 
+  const gotoNotif = () => {
+    props.navigation.navigate('Notification')
+  }
+
+  const gotoChat = () => {
+   navigation.navigate('Chat')
+  }
+
   React.useEffect(() => {
     LoadProfile();
   }, []);
@@ -69,7 +77,7 @@ const HomeExplore = (props) => {
     <View style={[styles.appBar]}>
       <Text style={[styles.appBarTitle]}>Explore</Text>
 
-      <View style={[styles.appBarRight]}>
+      <View style={[styles.appBarRight]} onPress={() => gotoChat()}>
         <TouchableOpacity activeOpacity={0.6}>
           <Icons
             name="mail"
@@ -79,7 +87,7 @@ const HomeExplore = (props) => {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity activeOpacity={0.6}>
+        <TouchableOpacity activeOpacity={0.6} onPress={() => gotoNotif()}>
           <Icons
             name="bell"
             size={28}

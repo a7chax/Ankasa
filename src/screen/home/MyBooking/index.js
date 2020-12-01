@@ -17,6 +17,14 @@ function MyBooking({ navigation }) {
   // const {username, city} = data;
   const dispatch = useDispatch();
 
+  const gotoNotif = () => {
+    navigation.navigate('Notification')
+  }
+
+  const gotoChat = () => {
+   navigation.navigate('Chat') 
+  }
+
   React.useEffect(() => {
     const callbackHandler = (err) => {
       setLoading(false);
@@ -27,11 +35,13 @@ function MyBooking({ navigation }) {
     dispatch(GetMyBooking(token, callbackHandler));
   }, []);
 
+
+
   const AppBar = () => (
     <View style={[styles.appBar]}>
       <Text style={[styles.appBarTitle]}>My Booking</Text>
 
-      <View style={[styles.appBarRight]}>
+      <View style={[styles.appBarRight]} onPress={() => gotoChat()}>
         <TouchableOpacity activeOpacity={0.6}>
           <Icons
             name="mail"
@@ -41,7 +51,7 @@ function MyBooking({ navigation }) {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity activeOpacity={0.6}>
+        <TouchableOpacity activeOpacity={0.6} onPress={() => gotoNotif()}>
           <Icons
             name="bell"
             size={28}

@@ -1,0 +1,111 @@
+[1mdiff --git a/src/screen/home/HomeExplore/index.js b/src/screen/home/HomeExplore/index.js[m
+[1mindex 3275dfc..70a3ff0 100644[m
+[1m--- a/src/screen/home/HomeExplore/index.js[m
+[1m+++ b/src/screen/home/HomeExplore/index.js[m
+[36m@@ -26,6 +26,14 @@[m [mconst HomeExplore = (props) => {[m
+   const {destination} = useSelector((state) => state.Destination);[m
+   const dispatch = useDispatch();[m
+ [m
+[32m+[m[32m  const gotoNotif = () => {[m
+[32m+[m[32m    props.navigation.navigate('Notification')[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  const gotoChat = () => {[m
+[32m+[m[32m   navigation.navigate('Chat')[m
+[32m+[m[32m  }[m
+[32m+[m
+   React.useEffect(() => {[m
+     LoadProfile();[m
+   }, []);[m
+[36m@@ -69,7 +77,7 @@[m [mconst HomeExplore = (props) => {[m
+     <View style={[styles.appBar]}>[m
+       <Text style={[styles.appBarTitle]}>Explore</Text>[m
+ [m
+[31m-      <View style={[styles.appBarRight]}>[m
+[32m+[m[32m      <View style={[styles.appBarRight]} onPress={() => gotoChat()}>[m
+         <TouchableOpacity activeOpacity={0.6}>[m
+           <Icons[m
+             name="mail"[m
+[36m@@ -79,7 +87,7 @@[m [mconst HomeExplore = (props) => {[m
+           />[m
+         </TouchableOpacity>[m
+ [m
+[31m-        <TouchableOpacity activeOpacity={0.6}>[m
+[32m+[m[32m        <TouchableOpacity activeOpacity={0.6} onPress={() => gotoNotif()}>[m
+           <Icons[m
+             name="bell"[m
+             size={28}[m
+[1mdiff --git a/src/screen/home/MyBooking/index.js b/src/screen/home/MyBooking/index.js[m
+[1mindex a6b72b8..57f5c99 100644[m
+[1m--- a/src/screen/home/MyBooking/index.js[m
+[1m+++ b/src/screen/home/MyBooking/index.js[m
+[36m@@ -17,6 +17,14 @@[m [mfunction MyBooking({ navigation }) {[m
+   // const {username, city} = data;[m
+   const dispatch = useDispatch();[m
+ [m
+[32m+[m[32m  const gotoNotif = () => {[m
+[32m+[m[32m    navigation.navigate('Notification')[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  const gotoChat = () => {[m
+[32m+[m[32m   navigation.navigate('Chat')[m[41m [m
+[32m+[m[32m  }[m
+[32m+[m
+   React.useEffect(() => {[m
+     const callbackHandler = (err) => {[m
+       setLoading(false);[m
+[36m@@ -27,11 +35,13 @@[m [mfunction MyBooking({ navigation }) {[m
+     dispatch(GetMyBooking(token, callbackHandler));[m
+   }, []);[m
+ [m
+[32m+[m
+[32m+[m
+   const AppBar = () => ([m
+     <View style={[styles.appBar]}>[m
+       <Text style={[styles.appBarTitle]}>My Booking</Text>[m
+ [m
+[31m-      <View style={[styles.appBarRight]}>[m
+[32m+[m[32m      <View style={[styles.appBarRight]} onPress={() => gotoChat()}>[m
+         <TouchableOpacity activeOpacity={0.6}>[m
+           <Icons[m
+             name="mail"[m
+[36m@@ -41,7 +51,7 @@[m [mfunction MyBooking({ navigation }) {[m
+           />[m
+         </TouchableOpacity>[m
+ [m
+[31m-        <TouchableOpacity activeOpacity={0.6}>[m
+[32m+[m[32m        <TouchableOpacity activeOpacity={0.6} onPress={() => gotoNotif()}>[m
+           <Icons[m
+             name="bell"[m
+             size={28}[m
+[1mdiff --git a/src/screen/home/Notification/index.js b/src/screen/home/Notification/index.js[m
+[1mindex f91479e..3dbd088 100644[m
+[1m--- a/src/screen/home/Notification/index.js[m
+[1m+++ b/src/screen/home/Notification/index.js[m
+[36m@@ -7,19 +7,23 @@[m [mimport {[m
+ import styles from './notification.style.js'[m
+ import {Navigation} from '../../../components/'[m
+ [m
+[31m-function Notification(){[m
+[32m+[m[32mfunction Notification({navigation}){[m
+ [m
+ 	const clearNotification = () => {[m
+ [m
+ 	}[m
+ [m
+ 	const goBack = () => {[m
+[31m-[m
+[32m+[m		[32mnavigation.goBack()[m
+ 	}[m
+ [m
+ 	return([m
+ 		<ScrollView style={{backgroundColor : '#FFFFFF'}}>[m
+[31m-			<Navigation onPress={() => goBack()} pageTitle={'Clear'} pageTitleEvent={() => clearNotification()}/>[m
+[32m+[m
+[32m+[m			[32m<View style={{marginTop : 20}}>[m
+[32m+[m				[32m<Navigation onPress={() => goBack()} pageTitle={'Clear'} pageTitleEvent={() => clearNotification()}/>[m
+[32m+[m			[32m</View>[m
+[32m+[m
+ [m
+ 			<View style={styles.makeColumn}>[m
+ 				<View>[m
