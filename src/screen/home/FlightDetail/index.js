@@ -14,7 +14,7 @@ import styles from './flightdetail.style'
 import {PlaneBig} from '../../../assets/'
 import { Rating, AirbnbRating } from 'react-native-ratings';
 import {Facilities} from '../../../components'
-
+import {DetailFlight} from '../../../redux/actions/DetailFlight'
 
 
 function FlightDetail(){
@@ -24,8 +24,11 @@ function FlightDetail(){
     if (Platform.OS === "android") {
       StatusBar.setBackgroundColor("rgba(0,0,0,0)");
       StatusBar.setTranslucent(true);
-    }
+	}
+		console.log(DetailFlight, 'ko')
   }, []);
+
+
 
 
 	return(
