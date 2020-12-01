@@ -4,7 +4,7 @@ const initialState = {
 
 const EDITPROFILE = (state = initialState, action = {}) => {
     switch (action.type) {
-        case 'PATCHPROFILE':
+        case 'FAILED_EDIT_USER':
             return {
                 ...state,
                 data: action.payload,

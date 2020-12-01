@@ -10,7 +10,7 @@ import {
 } from 'react-native'; 
 import {GetProfile} from '../../../redux/actions/Profiles';
 import {useSelector, useDispatch} from 'react-redux';
-import {EditProfiles} from '../../../redux/actions/EditProfile'
+import {editProfile} from '../../../redux/actions/EditProfile'
 
 
 const EditProfile = (props) => {
@@ -27,14 +27,22 @@ const EditProfile = (props) => {
     const {data} = useSelector((s) => s.Profiles);
 
     const submitEdit = () => {
-    const callbackHandler = (err) => {
-     
+      let data = {
+        username : username,
+        postcode : postcode,
+        address: address
+      }
 
-      if (err) return false;
-      // navigation.replace('HomeProfile');
-    }
+      dispatch(editProfile(data, token  ))
+      props.navigation.goBack('Profile')
 
-      dispatch(EditProfile(data, callbackHandler))
+      const callbackHandler = (err) => {
+        
+
+        if (err) return false;
+        // navigation.replace('HomeProfile');
+      };
+      dispatch(GetProfile(token, callbackHandler));         
     }
 
 
@@ -59,7 +67,9 @@ const EditProfile = (props) => {
 
 
 
+
     }, [])
+
 
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
@@ -104,8 +114,9 @@ const EditProfile = (props) => {
         </Text>
         <View style={styles.inputItem}>
           <TextInput          
+            editable={false}            
             value={email}  
-            style={{width: '90%'}}
+            style={{width: '90%', color : 'gray'}}
             autoCapitalize={'none'}
             returnKeyType="next"
             onChangeText={(text) => setEmail(text)}          
@@ -160,8 +171,9 @@ const EditProfile = (props) => {
         </Text>
         <View style={styles.inputItem}>
           <TextInput
+            editable={false}
             value={city}
-            style={{width: '90%'}}
+            style={{width: '90%', color : 'gray'}}
             autoCapitalize={'none'}
             onChangeText={(text) => setCity(text)}
             returnKeyType="next"
@@ -210,7 +222,7 @@ const EditProfile = (props) => {
 
       <View style={{backgroundColor: '#fff', padding: 25, paddingBottom: 30}}>
         <View style={{width: '50%', position: 'absolute', right: '0%'}}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => submitEdit()}>
             <Text
               style={styles.button}>
               Save

@@ -25,7 +25,7 @@ const HomeProfile = (props) => {
   const dispatch = useDispatch();
 
 
-  
+
   const gotoEditProfile = () => {
     props.navigation.navigate('EditProfile')
   }
@@ -38,6 +38,10 @@ const HomeProfile = (props) => {
       // navigation.replace('HomeProfile');
     };
     dispatch(GetProfile(token, callbackHandler));
+
+    return () => {
+      
+    }
   }, []);
 
   const onLogout = () => {
