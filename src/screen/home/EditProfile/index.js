@@ -8,8 +8,16 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native'; 
+import { EditProfiles} from '../../../redux/actions/EditProfile'
 
 const EditProfile = () => {
+  const [data, setData] = React.useState({
+    username: '',
+    postcode: '',
+    address: '',
+    id_city: '',
+  })
+
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
       <View

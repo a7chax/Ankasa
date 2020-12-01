@@ -1,7 +1,8 @@
 import axios from '../../helpers/axios';
 import AxiosBase from 'axios';
 import {ToastAndroid} from 'react-native';
-import {API_URL} from '../../../env';
+import {API_URI, API_URL} from '../../../env';
+import {Header} from 'react-native/Libraries/NewAppScreen';
 
 const handleError = (error) => {
   console.log(error);
@@ -11,8 +12,12 @@ const handleError = (error) => {
   return ToastAndroid.show('Connection Refused', ToastAndroid.LONG);
 };
 
-const GetProfile = (id, callback) => (dispatch) => {
-  AxiosBase.get(`${API_URL}/profiles/${id}`)
+const GetProfile = (token, callback) => (dispatch) => {
+  AxiosBase.get(`${API_URI}/users/detail`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
     .then((response) => {
       callback(false, response); // isError, response
       return dispatch({type: 'GETPROFILES', payload: response.data.data});
