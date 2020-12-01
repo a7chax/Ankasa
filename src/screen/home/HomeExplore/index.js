@@ -87,7 +87,10 @@ const HomeExplore = (props) => {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity activeOpacity={0.6} onPress={() => gotoNotif()}>
+
+        
+
+<TouchableOpacity activeOpacity={0.6} onPress={() => gotoNotif()}>
           <Icons
             name="bell"
             size={28}

@@ -12,7 +12,7 @@ import styles from './Chat.component';
 import ArrowLeft from '../../../assets/illustration/arrow-left-white.svg';
 import ArrowRight from '../../../assets/illustration/send.svg';
 
-export default function Chat() {
+export default function Chat({navigation}) {
   const [chat, setChat] = useState('');
 
   const onSubmit = () => {};
@@ -21,7 +21,7 @@ export default function Chat() {
       <StatusBar backgroundColor="#2395FF" barStyle="light-content" />
       <View style={styles.topBar}>
         <View style={styles.topBarContent}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+          <TouchableOpacity onPress={() => navigation.pop()}>
             {/* Gambar Panah */}
             <ArrowLeft width={28} height={28} />
           </TouchableOpacity>
@@ -50,9 +50,7 @@ export default function Chat() {
           value={chat}
           returnKeyType="send"
         />
-        <TouchableOpacity
-          onPress={onSubmit}
-          style={styles.button}>
+        <TouchableOpacity onPress={onSubmit} style={styles.button}>
           <ArrowRight height={28} width={28} style={styles.submitButton} />
         </TouchableOpacity>
       </View>

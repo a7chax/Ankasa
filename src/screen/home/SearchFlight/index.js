@@ -62,13 +62,10 @@ const SearchFlight = (props) => {
   const tomorrow = new Date();
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const [roundTrip, setRoundTrip] = useState(false);
+  const [roundTrip, setRoundTrip] = useState(true);
   const [child, setChild] = useState(0);
   const [adult, setAdult] = useState(1);
-  const [from, setFrom] = useState('');
-  const [to, setTo] = useState('');
-  const [classSuite, setClassSuite] = useState('Economy');
-  const [date, setDate] = useState(new Date());
+  const [classSuite, setClassSuite] = useState('1');
   const [departDate, setDepartDate] = useState(todayMoment);
   const [returnDate, setReturnDate] = useState(
     todayMoment.clone().add(1, 'days'),
@@ -92,8 +89,6 @@ const SearchFlight = (props) => {
     setAsal(city);
   };
 
-  const submitSearch = () => {};
-
   function formatDateView(param) {
     const dateString = param;
     const dateObj = new Date(dateString);
@@ -111,8 +106,9 @@ const SearchFlight = (props) => {
 
   const searchResult = () => {
     props.navigation.navigate('SearchResult', {
+      ...props.route.params,
+      departure_at: moment(departDate).format(),
       depart: departDateView,
-      tujuan: tujuan,
       asal: asal,
       child: child,
       adult: adult,
@@ -137,9 +133,9 @@ const SearchFlight = (props) => {
   };
 
   var radio_props = [
-    {label: 'Economy', value: 'Economy'},
-    {label: 'Business', value: 'Business'},
-    {label: 'First Class', value: 'First Class'},
+    {label: 'Economy', value: '1'},
+    {label: 'Business', value: '2'},
+    {label: 'First Class', value: '3'},
   ];
 
   if (loading) {
@@ -168,7 +164,7 @@ const SearchFlight = (props) => {
         <View style={{backgroundColor: '#fff'}}>
           <View style={style.jumbotron}>
             <Image
-              source={require('../../../assets/illustration/destinasi.png')}
+              source={{uri: props.route.params.photo}}
               style={{
                 width: '100%',
                 height: 280,
@@ -292,7 +288,8 @@ const SearchFlight = (props) => {
                 </Text>
 
                 <TouchableNativeFeedback
-                  onPress={() => refRBSheetTujuan.current.open()}>
+                // onPress={() => refRBSheetTujuan.current.open()}
+                >
                   <Text
                     style={{
                       position: 'absolute',
@@ -303,7 +300,7 @@ const SearchFlight = (props) => {
                       fontFamily: 'Poppins-SemiBold',
                       color: '#000000',
                     }}>
-                    {tujuan == '' ? setTujuan(Booking.data[0].name) : tujuan}
+                    {props.route.params.city}
                   </Text>
                 </TouchableNativeFeedback>
 
@@ -317,7 +314,7 @@ const SearchFlight = (props) => {
                     fontFamily: 'Lato-Regular',
                     color: '#979797',
                   }}>
-                  Indonesia
+                  {props.route.params.name}
                 </Text>
               </View>
             </View>
