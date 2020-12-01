@@ -18,18 +18,22 @@ import { GetDetailFlight } from '../../../redux/actions/DetailFlight'
 import { useDispatch, useSelector } from 'react-redux';
 
 
-function FlightDetail() {
+function FlightDetail(props) {
 	const [loading, setLoading] = React.useState(false);
 	const dispatch = useDispatch();
   const { data } = useSelector((state) => state.DetailFlight);
   // const { items } = route.params;
 
 
+  const kembali = () => {
+  	props.navigation.goBack('SearchResult')
+  }
+
 	const getDetailFlight = () => {
 		setLoading(true);
 		const callbackHandler = (err, res) => {
 			setLoading(false);
-			console.log(res.data.data)
+			
 
 			if (err) return false;
 		};
@@ -58,7 +62,7 @@ function FlightDetail() {
 				<View style={styles.backgroundFlight} />
 
 				<View style={{ position: 'absolute', zIndex: 2, marginTop: 20 }}>
-					<NavigationWhite />
+					<NavigationWhite onPress={() => kembali()} />
 				</View>
 
 

@@ -120,7 +120,7 @@ const SearchResult = (props) => {
             </>
           ) : searchData.map(item => {
 
-            const bertujuanlagi = item.name.substring(0,3)
+            const bertujuanlagi = item.city.substring(0,3)
             return (
               <>
                 <TouchableNativeFeedback onPress={() => gotoDetail()}>

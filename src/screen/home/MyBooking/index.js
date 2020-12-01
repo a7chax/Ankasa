@@ -63,6 +63,8 @@ function MyBooking({navigation}) {
   }
 
   const renderItem = ({item}) => {
+    const bertujuan = item.destination.substring(0,3)    
+    const berasal = item.from.substring(0,3)    
     return (
       <>
         <View style={styles.makeColumn}>
@@ -79,14 +81,14 @@ function MyBooking({navigation}) {
               <View
                 style={{flexDirection: 'row', marginTop: 10, marginBottom: 6}}>
                 <View>
-                  <Text style={styles.destinationText}>IDN</Text>
+                  <Text style={styles.destinationText}>{berasal}</Text>
                 </View>
                 <View style={{marginHorizontal: 20}}>
                   <Icon name="plane-departure" size={25} color="#979797" />
                 </View>
 
                 <View>
-                  <Text style={styles.destinationText}>IDN</Text>
+                  <Text style={styles.destinationText}>{bertujuan}</Text>
                 </View>
               </View>
 
