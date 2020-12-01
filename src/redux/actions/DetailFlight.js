@@ -1,5 +1,8 @@
 import axios from '../../helpers/axios';
 import { ToastAndroid } from 'react-native';
+import Axios from 'axios'
+import {API_URI} from '../../../env.js'
+
 
 const handleError = (error) => {
     console.log(error);
@@ -25,5 +28,20 @@ const GetDetailFlight = (id = 5 , callback) => (dispatch) => {
         return handleError(err);
     })
 }
+
+
+export const postTransfer  = (data, token) => async dispatch => {
+    try{
+        const header = { headers: {
+                'Authorization': `Bearer ${token}`,
+            }}
+        const res = await Axios.post(`${API_URI}/users/transaction`,data, header)
+    }catch(error){
+        dispatch({type : 'FAILED_ADD_FLIGHT', payload : error})
+    }
+}
+
+
+
 
 export {GetDetailFlight}

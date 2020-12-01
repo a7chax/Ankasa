@@ -9,6 +9,11 @@ const FLIGHT = (state = initialState, action = {}) => {
                 ...state,
                 data: action.payload,
             };
+        case 'FAILED_ADD_FLIGHT' :
+            return {
+                ...state,
+                data : action.payload
+            }
         default:
             return state;
     }

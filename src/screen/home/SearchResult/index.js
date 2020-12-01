@@ -3,8 +3,7 @@ import { TouchableOpacity, TouchableNativeFeedback, TextInput, Modal, Text, Scro
 import styles from './style'
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { getSearchFlight } from '../../../redux/actions/Booking'
-
+import {getSearchFlight} from '../../../redux/actions/Booking'
 
 
 
@@ -35,8 +34,28 @@ const SearchResult = (props) => {
 
 
   const gotoDetail = () => {
-    props.navigation.navigate('FlightDetail', { adult: adult, asal: asal, child: child, tujuan: tujuan, classSuite: classSuite })
+    props.navigation.navigate('FlightDetail', { adult: adult, asal: asal, child: child, tujuan: tujuan, classSuite: classSuite, depart : depart })
   }
+
+
+    function ticketPrice(params){
+      if(params == 'Economy'){
+        let price = (14500 * adult) + (1200 * child)
+        return price
+      }else
+
+    if(params == 'Bussiness'){
+      let price = (15500 * adult) + (1300 * child)
+      return price          
+    }
+
+      if(params == 'First Class'){
+        let price = (17500 * adult) + (2000 * child)
+        return price          
+      }     
+    }
+
+    const price = ticketPrice(classSuite)  
 
   const berasal = asal.substring(0, 3)
   const bertujuan = tujuan.substring(0, 3)
@@ -162,7 +181,7 @@ const SearchResult = (props) => {
                             </View>
                           </View>
                           <View>
-                            <Text style={{ textAlign: 'right', fontFamily: 'Poppins-SemiBold', fontSize: 16, color: '#2395FF' }}>$ 214,00</Text>
+                            <Text style={{ textAlign: 'right', fontFamily: 'Poppins-SemiBold', fontSize: 16, color: '#2395FF' }}>$ {price}</Text>
                           </View>
                         </View>
                       </View>

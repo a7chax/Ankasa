@@ -16,6 +16,7 @@ import { Rating, AirbnbRating } from 'react-native-ratings';
 import { Facilities } from '../../../components'
 import { GetDetailFlight } from '../../../redux/actions/DetailFlight'
 import { useDispatch, useSelector } from 'react-redux';
+import { postTransfer } from '../../../redux/actions/Booking'
 
 
 function FlightDetail(props) {
@@ -28,6 +29,37 @@ function FlightDetail(props) {
   const kembali = () => {
   	props.navigation.goBack('SearchResult')
   }
+
+  const { adult, asal,  child,  tujuan,  classSuite,  depart } = props.route.params
+
+    const berasal = asal.substring(0, 3)
+    const bertujuan = tujuan.substring(0, 3)
+
+
+    function ticketPrice(params){
+    	if(params == 'Economy'){
+    		let price = (14500 * adult) + (1200 * child)
+    		return price
+    	}else
+
+		if(params == 'Bussiness'){
+			let price = (15500 * adult) + (1300 * child)
+			return price    			
+		}
+
+    	if(params == 'First Class'){
+    		let price = (17500 * adult) + (2000 * child)
+    		return price    			
+    	}    	
+    }
+
+    
+
+
+
+
+
+    const price = ticketPrice(classSuite)
 
 	const getDetailFlight = () => {
 		setLoading(true);
@@ -46,8 +78,11 @@ function FlightDetail(props) {
 			StatusBar.setBackgroundColor("rgba(0,0,0,0)");
 			StatusBar.setTranslucent(true);
 		}
-		getDetailFlight()
-		console.log(data.air_name, 'tesss')
+			
+
+		
+
+
 	}, []);
 
 
@@ -74,7 +109,7 @@ function FlightDetail(props) {
 
 							<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 								<View>
-  <Text style={styles.destinationText}>{data.name}</Text>
+  <Text style={styles.destinationText}>{berasal}</Text>
 									<Text style={[styles.estimated, { textAlign: 'left' }]}>15:21</Text>
 								</View>
 
@@ -83,7 +118,7 @@ function FlightDetail(props) {
 								</View>
 
 								<View style={{ flexDirection: 'column' }}>
-  <Text style={styles.destinationText}>{data.destination}</Text>
+  <Text style={styles.destinationText}>{bertujuan}</Text>
 									<Text style={[styles.estimated, { textAlign: 'right' }]}>15:21</Text>
 								</View>
 							</View>
@@ -118,8 +153,7 @@ function FlightDetail(props) {
 
 								<View style={{ flexDirection: 'column', flexBasis: 65 }}>
 									<Text style={styles.detailTitle}>Class</Text>
-                  {data.type === 1 ? <Text>Economy</Text>: <Text>Bussiness</Text>}
-  <Text style={styles.detailSubtitle}>{data.type}</Text>
+                  						<Text>{classSuite}</Text>
 								</View>
 
 
@@ -148,14 +182,14 @@ function FlightDetail(props) {
 							<View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 15 }}>
 								<View style={{ flexDirection: 'row' }}>
 									<View style={{ backgroundColor: 'rgba(35, 149, 255, 0.18)', width: 38, height: 38, borderRadius: 100 / 2 }}>
-										<Text style={{ textAlign: 'center', marginTop: 5, color: '#2395FF', fontSize: 18, fontFamily: 'Poppins-Bold' }}>2</Text>
+										<Text style={{ textAlign: 'center', marginTop: 5, color: '#2395FF', fontSize: 18, fontFamily: 'Poppins-Bold' }}>{child}</Text>
 									</View>
 									<Text style={{ fontSize: 14, marginLeft: 10, marginTop: 7, fontFamily: 'Poppins-Regular' }}>Child</Text>
 								</View>
 
 								<View style={{ flexDirection: 'row' }}>
 									<View style={{ backgroundColor: 'rgba(35, 149, 255, 0.18)', width: 38, height: 38, borderRadius: 100 / 2 }}>
-										<Text style={{ textAlign: 'center', marginTop: 5, color: '#2395FF', fontSize: 18, fontFamily: 'Poppins-Bold' }}>4</Text>
+										<Text style={{ textAlign: 'center', marginTop: 5, color: '#2395FF', fontSize: 18, fontFamily: 'Poppins-Bold' }}>{adult}</Text>
 									</View>
 									<Text style={{ fontSize: 14, marginLeft: 10, marginTop: 7, fontFamily: 'Poppins-Regular' }}>Adult	</Text>
 								</View>
@@ -182,7 +216,7 @@ function FlightDetail(props) {
 						</View>
 
 						<View>
-							<Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: 24, color: '#2395FF' }}>$ 145,00</Text>
+							<Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: 24, color: '#2395FF' }}>$ {price}</Text>
 						</View>
 					</View>
 
