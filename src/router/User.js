@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 
 function User() {
   return (
-    <Stack.Navigator initialRouteName="Home" headerMode>
+    <Stack.Navigator initialRouteName="SearchFlight" headerMode>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Notification" component={Notification} />
       <Stack.Screen name="SearchResult" component={SearchResult} />
