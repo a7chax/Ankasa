@@ -1,4 +1,4 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet, Dimensions, StatusBar} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -11,7 +11,7 @@ export default StyleSheet.create({
   },
   appBar: {
     paddingHorizontal: 28,
-    marginTop: 20,
+    marginTop: 20 + StatusBar.currentHeight,
     marginBottom: 5,
     flexDirection: 'row',
     alignItems: 'center',

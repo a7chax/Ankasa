@@ -8,6 +8,7 @@ import {
   Dimensions,
   Image,
   ScrollView,
+  StatusBar,
 } from 'react-native';
 import Icons from 'react-native-vector-icons/Feather';
 import Icons2 from 'react-native-vector-icons/FontAwesome';
@@ -216,7 +217,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 28,
   },
   appBar: {
-    marginTop: 20,
+    marginTop: 20 + StatusBar.currentHeight,
     marginBottom: 5,
     flexDirection: 'row',
     alignItems: 'center',
