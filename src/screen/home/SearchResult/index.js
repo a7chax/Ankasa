@@ -1,9 +1,9 @@
-import React,{useEffect, useState, Fragment} from 'react';
-import { TouchableOpacity, TouchableNativeFeedback,TextInput, Modal, Text, ScrollView, View, Image } from 'react-native';
+import React, { useEffect, useState, Fragment } from 'react';
+import { TouchableOpacity, TouchableNativeFeedback, TextInput, Modal, Text, ScrollView, View, Image } from 'react-native';
 import styles from './style'
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import {getSearchFlight} from '../../../redux/actions/Booking'
+import { getSearchFlight } from '../../../redux/actions/Booking'
 
 
 
@@ -27,26 +27,26 @@ const SearchResult = (props) => {
     props.navigation.goBack('SearchFlight')
   }
 
-  const {token} = useSelector((s) => s.Auth);
-  const {searchData} = useSelector((s) => s.Booking);
+  const { token } = useSelector((s) => s.Auth);
+  const { searchData } = useSelector((s) => s.Booking);
   const dispatch = useDispatch();
 
-  let {adult, asal, child, depart, tujuan, classSuite} = props.route.params
+  let { adult, asal, child, depart, tujuan, classSuite } = props.route.params
 
 
   const gotoDetail = () => {
-    props.navigation.navigate('FlightDetail', {adult : adult, asal : asal, child : child, tujuan : tujuan, classSuite : classSuite})
+    props.navigation.navigate('FlightDetail', { adult: adult, asal: asal, child: child, tujuan: tujuan, classSuite: classSuite })
   }
 
-  const berasal = asal.substring(0,3)
-  const bertujuan = tujuan.substring(0,3)
+  const berasal = asal.substring(0, 3)
+  const bertujuan = tujuan.substring(0, 3)
   useEffect(() => {
-    dispatch(getSearchFlight(tujuan, token ))
+    dispatch(getSearchFlight(tujuan, token))
 
     console.log(searchData, '                    ini search data                  ')
 
     return () => {
-      
+
     };
   }, [])
   return (
@@ -58,7 +58,7 @@ const SearchResult = (props) => {
             source={require('../../../assets/illustration/ankasa.png')}></Image>
 
           <TouchableNativeFeedback onPress={() => kembali()}>
-            <Icon name="chevron-left" size={25} color="white" style={{position : 'relative', bottom : 200, marginLeft : 25}} />
+            <Icon name="chevron-left" size={25} color="white" style={{ position: 'relative', bottom: 200, marginLeft: 25 }} />
           </TouchableNativeFeedback>
 
           <Text style={styles.padding}></Text>
@@ -109,9 +109,9 @@ const SearchResult = (props) => {
           style={styles.filterImage}
         />
       </TouchableOpacity>
-      <View style={{flexDirection : 'column',marginHorizontal : 25, marginTop : 25}}>
+      <View style={{ flexDirection: 'column', marginHorizontal: 25, marginTop: 25 }}>
 
-        { searchData == undefined || searchData == '' ? 
+        {searchData == undefined || searchData == '' ?
           (
             <>
               <View>
@@ -120,66 +120,66 @@ const SearchResult = (props) => {
             </>
           ) : searchData.map(item => {
 
-            const bertujuanlagi = item.city.substring(0,3)
+            const bertujuanlagi = item.city.substring(0, 3)
             return (
               <>
                 <TouchableNativeFeedback onPress={() => gotoDetail()}>
                   <View>
-                  <View style={{borderColor : 'black', borderWidth : 0.5, borderRadius : 12, width : '100%' ,marginBottom : 15}}>          
-                  
-                    <View style={{flexDirection : 'row', justifyContent : 'space-between', marginHorizontal : 25, marginVertical :25}}>
-                      <View style={{flexDirection : 'column', justifyContent : 'space-between'}}>
-                        <View style={{flexDirection : 'row'}}>
-                            <View style={{flexDirection : 'column'}}>
-                              <Text style={{fontFamily : 'Poppins-SemiBold', fontSize : 28, color: '#000000',marginBottom : -5}}>{berasal}</Text>  
-                              <Text style={{fontSize : 12, fontFamily : 'Poppins-Regular', color: '#6B6B6B'}}>12:33</Text>
-                            </View>
-                            
-                            <Icon name='plane-departure' size={15} style={{marginHorizontal : 15, marginTop : 15}}/>
+                    <View style={{ borderColor: 'black', borderWidth: 0.5, borderRadius: 12, width: '100%', marginBottom: 15 }}>
 
-                            <View style={{flexDirection : 'column'}}>
-                              <Text style={{fontFamily : 'Poppins-SemiBold', fontSize : 28, color: '#000000', marginBottom : -5}}>{bertujuanlagi}</Text>  
-                              <Text style={{fontSize : 12, fontFamily : 'Poppins-Regular', color: '#6B6B6B'}}>12:33</Text>
-                            </View>              
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 25, marginVertical: 25 }}>
+                        <View style={{ flexDirection: 'column', justifyContent: 'space-between' }}>
+                          <View style={{ flexDirection: 'row' }}>
+                            <View style={{ flexDirection: 'column' }}>
+                              <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: 28, color: '#000000', marginBottom: -5 }}>{berasal}</Text>
+                              <Text style={{ fontSize: 12, fontFamily: 'Poppins-Regular', color: '#6B6B6B' }}>12:33</Text>
+                            </View>
+
+                            <Icon name='plane-departure' size={15} style={{ marginHorizontal: 15, marginTop: 15 }} />
+
+                            <View style={{ flexDirection: 'column' }}>
+                              <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: 28, color: '#000000', marginBottom: -5 }}>{bertujuanlagi}</Text>
+                              <Text style={{ fontSize: 12, fontFamily: 'Poppins-Regular', color: '#6B6B6B' }}>12:33</Text>
+                            </View>
+                          </View>
+
+                          <View style={{ marginTop: 20 }}>
+                            <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: '#595959' }}>Garuda Indonesia</Text>
+                          </View>
                         </View>
 
-                        <View style={{marginTop : 20}}>
-                          <Text style={{fontFamily : 'Poppins-Regular', fontSize : 16, color : '#595959'}}>Garuda Indonesia</Text>
+                        <View style={{ flexDirection: 'column', justifyContent: 'space-between', marginTop: 6 }}>
+
+                          <View style={{ flexDirection: 'column' }}>
+                            <View style={{ flexDirection: 'row' }}>
+                              <Text style={{ textAlign: 'right', fontSize: 12, fontFamily: 'Poppins-Regular' }}>Terminal :</Text>
+                              <Text style={{ textAlign: 'right', fontSize: 12, fontFamily: 'Poppins-SemiBold' }}> A</Text>
+                            </View>
+
+                            <View style={{ flexDirection: 'row', }}>
+                              <Text style={{ fontSize: 12, fontFamily: 'Poppins-Regular' }}>Gate :</Text>
+                              <Text style={{ fontSize: 12, fontFamily: 'Poppins-SemiBold' }}> A</Text>
+                            </View>
+                          </View>
+                          <View>
+                            <Text style={{ textAlign: 'right', fontFamily: 'Poppins-SemiBold', fontSize: 16, color: '#2395FF' }}>$ 214,00</Text>
+                          </View>
                         </View>
                       </View>
 
-                      <View style={{flexDirection : 'column', justifyContent : 'space-between', marginTop : 6 }}>
-                        
-                            <View style={{flexDirection : 'column'}}>
-                              <View style={{flexDirection : 'row'}}>
-                                <Text style={{textAlign : 'right', fontSize : 12, fontFamily : 'Poppins-Regular'}}>Terminal :</Text>    
-                                <Text style={{textAlign : 'right', fontSize : 12, fontFamily : 'Poppins-SemiBold'}}> A</Text>  
-                              </View>
-                              
-                              <View style={{flexDirection : 'row',}}>
-                                <Text style={{fontSize : 12, fontFamily : 'Poppins-Regular'}}>Gate :</Text>    
-                                <Text style={{fontSize : 12, fontFamily : 'Poppins-SemiBold'}}> A</Text>  
-                              </View>                                        
-                            </View>            
-                        <View>
-                          <Text style={{textAlign : 'right', fontFamily : 'Poppins-SemiBold', fontSize : 16,color: '#2395FF' }}>$ 214,00</Text>
-                        </View>
-                      </View>            
                     </View>
-
-                  </View>      
                   </View>
-                  </TouchableNativeFeedback>                            
+                </TouchableNativeFeedback>
               </>
             )
-        })
+          })
 
         }
 
 
 
-    
-          
+
+
       </View>
 
       {/* modal update */}
@@ -215,9 +215,9 @@ const SearchResult = (props) => {
               <Text style={styles.textModalTitle}>Price</Text>
               <View style={styles.modalsCard}>
                 <View style={styles.inputModal}>
-                  <TextInput style={styles.inputText} placeholder="Min"/>
-                  <TextInput style={styles.inputText} value="-"/>
-                  <TextInput style={styles.inputText} placeholder="Max"/>
+                  <TextInput style={styles.inputText} placeholder="Min" />
+                  <TextInput style={styles.inputText} value="-" />
+                  <TextInput style={styles.inputText} placeholder="Max" />
                 </View>
               </View>
             </View>

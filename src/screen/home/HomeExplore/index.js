@@ -8,6 +8,7 @@ import {
   Dimensions,
   Image,
   ScrollView,
+  StatusBar,
 } from 'react-native';
 import Icons from 'react-native-vector-icons/Feather';
 import Carousel from 'react-native-snap-carousel';
@@ -52,12 +53,17 @@ const HomeExplore = (props) => {
 
   if (loading) {
     return (
-      <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
+      <View
+        style={{
+          justifyContent: 'center',
+          flex: 1,
+          alignItems: 'center',
+          backgroundColor: 'white',
+        }}>
         <ActivityIndicator size="small" color="#2395FF" />
       </View>
     );
   }
-
 
   const AppBar = () => (
     <View style={[styles.appBar]}>
@@ -85,22 +91,20 @@ const HomeExplore = (props) => {
     </View>
   );
 
-
   const gotoSearch = () => {
-    props.navigation.push('SearchFlight')
-  }
-
+    props.navigation.push('SearchFlight');
+  };
 
   const SearchBox = () => (
     <View style={[styles.searchBox]}>
       <Icons name="search" size={28} color="#A3A3A3" />
       <TouchableOpacity onPress={() => gotoSearch()}>
-      <TextInput
-        editable={false}
-        onChangeText={(text) => console.log(text)}
-        placeholder="Where you want to go?"
-        style={{width: '91%', marginLeft: 8}}
-      />
+        <TextInput
+          editable={false}
+          onChangeText={(text) => console.log(text)}
+          placeholder="Where you want to go?"
+          style={{width: '91%', marginLeft: 8}}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -241,7 +245,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 28,
   },
   appBar: {
-    marginTop: 20,
+    marginTop: 20 + StatusBar.currentHeight,
     marginBottom: 5,
     flexDirection: 'row',
     alignItems: 'center',

@@ -27,5 +27,5 @@ export {
   SearchFlight,
   SearchResult,
   FlightDetail,
-  EditProfile
+  EditProfile,
 };
