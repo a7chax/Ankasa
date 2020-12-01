@@ -6,7 +6,7 @@ import {
   SearchFlight,
   SearchResult,
   FlightDetail,
-  EditProfile
+  EditProfile,
 } from '../screen/';
 import Home from './Home';
 
@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 
 function User() {
   return (
-    <Stack.Navigator initialRouteName="SearchFlight" headerMode>
+    <Stack.Navigator initialRouteName="Home" headerMode>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Notification" component={Notification} />
       <Stack.Screen name="SearchResult" component={SearchResult} />
@@ -22,7 +22,6 @@ function User() {
       <Stack.Screen name="DetailBooking" component={DetailBooking} />
       <Stack.Screen name="FlightDetail" component={FlightDetail} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
-    
     </Stack.Navigator>
   );
 }

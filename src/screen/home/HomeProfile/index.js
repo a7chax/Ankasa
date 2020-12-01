@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -12,14 +12,34 @@ import {
 import Icons from 'react-native-vector-icons/Feather';
 import Icons2 from 'react-native-vector-icons/FontAwesome';
 import Carousel from 'react-native-snap-carousel';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {GetProfile} from '../../../redux/actions/Profiles';
 
 const {width} = Dimensions.get('screen');
 
-const HomeProfile = () => {
+const HomeProfile = ({navigation}) => {
   const {data} = useSelector((s) => s.Profiles);
+  const {token} = useSelector((s) => s.Auth);
+  const [loading, setLoading] = useState(true);
   const {username, city} = data;
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    const callbackHandler = (err) => {
+      setLoading(false);
+
+      if (err) return false;
+      // navigation.replace('HomeProfile');
+      console.log(data);
+      console.log('data');
+    };
+    dispatch(GetProfile(token, callbackHandler));
+  }, []);
+
+  const onLogout = () => {
+    dispatch({type: 'AUTHLOGOUT'});
+    navigation.replace('Auth');
+  };
 
   const AppBar = () => (
     <View style={[styles.appBar]}>
@@ -66,10 +86,6 @@ const HomeProfile = () => {
       </Text>
     </View>
   );
-
-  const onLogout = () => {
-    dispatch({type: 'AUTHLOGOUT'});
-  };
 
   const Content = () => (
     <>
