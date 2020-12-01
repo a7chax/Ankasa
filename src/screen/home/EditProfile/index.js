@@ -7,6 +7,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  ToastAndroid
 } from 'react-native'; 
 import {GetProfile} from '../../../redux/actions/Profiles';
 import {useSelector, useDispatch} from 'react-redux';
@@ -34,6 +35,7 @@ const EditProfile = (props) => {
       }
 
       dispatch(editProfile(data, token  ))
+      ToastAndroid.show('Success edit profile', ToastAndroid.SHORT)
       props.navigation.goBack('Profile')
 
       const callbackHandler = (err) => {
