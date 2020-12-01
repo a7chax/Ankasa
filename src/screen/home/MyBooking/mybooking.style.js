@@ -1,9 +1,9 @@
-import {StyleSheet, Dimensions, StatusBar} from 'react-native';
+import { StyleSheet, Dimensions, StatusBar } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {RFPercentage as fp} from 'react-native-responsive-fontsize';
+import { RFPercentage as fp } from 'react-native-responsive-fontsize';
 
 export default StyleSheet.create({
   textinit: {
@@ -38,7 +38,7 @@ export default StyleSheet.create({
     borderRadius: 15,
     elevation: 4,
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 5,
   },
@@ -68,7 +68,7 @@ export default StyleSheet.create({
   horizontalLine: {
     borderBottomColor: '#E6E6E6',
     borderBottomWidth: 2,
-    paddingTop: 20,
+    paddingTop: 2,
   },
   statusPostion: {
     flexDirection: 'row',

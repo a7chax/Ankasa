@@ -1,18 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import {ScrollView, View, Text, TouchableOpacity, FlatList} from 'react-native';
-import {Button} from 'react-native-paper';
-import {MobileNavigation} from '../../../components/';
+import React, { useState, useEffect } from 'react';
+import { ScrollView, View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { Button } from 'react-native-paper';
+import { MobileNavigation } from '../../../components/';
 import styles from './mybooking.style.js';
-import {TicketBackgroundSmall} from '../../../assets';
+import { TicketBackgroundSmall } from '../../../assets';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icons from 'react-native-vector-icons/Feather';
-import {useSelector, useDispatch} from 'react-redux';
-import {GetMyBooking} from '../../../redux/actions/MyBooking';
+import { useSelector, useDispatch } from 'react-redux';
+import { GetMyBooking } from '../../../redux/actions/MyBooking';
 import moment from 'moment';
 
-function MyBooking({navigation}) {
-  const {data} = useSelector((s) => s.MyBooking);
-  const {token} = useSelector((s) => s.Auth);
+function MyBooking({ navigation }) {
+  const { data } = useSelector((s) => s.MyBooking);
+  const { token } = useSelector((s) => s.Auth);
   const [loading, setLoading] = useState(true);
   // const {username, city} = data;
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ function MyBooking({navigation}) {
           <Icons
             name="mail"
             size={28}
-            style={{marginHorizontal: 10}}
+            style={{ marginHorizontal: 10 }}
             color="#595959"
           />
         </TouchableOpacity>
@@ -45,7 +45,7 @@ function MyBooking({navigation}) {
           <Icons
             name="bell"
             size={28}
-            style={{marginHorizontal: 10}}
+            style={{ marginHorizontal: 10 }}
             color="#595959"
           />
         </TouchableOpacity>
@@ -62,14 +62,14 @@ function MyBooking({navigation}) {
     return momentString;
   }
 
-  const renderItem = ({item}) => {
-    const bertujuan = item.destination.substring(0,3)    
-    const berasal = item.from.substring(0,3)    
+  const renderItem = ({ item }) => {
+    const bertujuan = item.destination.substring(0, 3)
+    const berasal = item.from.substring(0, 3)
     return (
       <>
         <View style={styles.makeColumn}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('DetailBooking', {id: item.id})}
+            onPress={() => navigation.navigate('DetailBooking', { id: item.id })}
             style={styles.boxTicket}>
             <View style={styles.ineerCardPos}>
               <View>
@@ -79,36 +79,35 @@ function MyBooking({navigation}) {
               </View>
 
               <View
-                style={{flexDirection: 'row', marginTop: 10, marginBottom: 6}}>
+                style={{ flexDirection: 'row', marginTop: 10, marginBottom: 6 }}>
                 <View>
-                  <Text style={styles.destinationText}>{berasal}</Text>
+                  <Text style={styles.destinationText}>{item.from}</Text>
                 </View>
-                <View style={{marginHorizontal: 20}}>
+                <View style={{ marginHorizontal: 20 }}>
                   <Icon name="plane-departure" size={25} color="#979797" />
                 </View>
 
                 <View>
-                  <Text style={styles.destinationText}>{bertujuan}</Text>
+                  <Text style={styles.destinationText}>{item.city}</Text>
                 </View>
               </View>
 
               <View>
                 <Text style={styles.planeText}>
-                  Garuda Indonesia, {item.terminal}-{item.gate}
+                  {item.airport_name}, {item.terminal}-{item.gate}
                 </Text>
               </View>
             </View>
 
-            <View style={styles.horizontalLine}></View>
 
             <View style={styles.statusPostion}>
-              <View style={{marginVertical: 20}}>
+              <View style={{ marginVertical: 20 }}>
                 <Text style={styles.textStatus}>Status</Text>
               </View>
 
-              <View style={{marginVertical: 20}}>
-                <View style={styles.boxStatus}>
-                  <Text style={styles.statusDesc}>Waiting for payment</Text>
+              <View style={{ marginVertical: 20 }}>
+                <View style={[styles.boxStatus, { backgroundColor: item.status === 0 ? "#FF7F23" : "#4FCF4D" }]}>
+                  <Text style={styles.statusDesc}>{item.status === 0 ? "Waiting for payment" : "Success"}</Text>
                 </View>
               </View>
             </View>
@@ -118,7 +117,7 @@ function MyBooking({navigation}) {
     );
   };
   return (
-    <View style={{backgroundColor: '#FFFFFF'}}>
+    <View style={{ backgroundColor: '#FFFFFF', flex: 1 }}>
       <AppBar />
 
       <FlatList
