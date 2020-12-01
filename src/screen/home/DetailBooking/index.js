@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 import {
   ScrollView,
   View,
@@ -11,16 +11,16 @@ import styles from './detailbooking.style.js';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Barcode from 'react-native-barcode-builder';
 import NavigationDotted from '../../../components/navigationDotted/';
-import { useDispatch, useSelector } from 'react-redux';
-import { getDetailBooking } from '../../../redux/actions/DetailBooking.js';
+import {useDispatch, useSelector} from 'react-redux';
+import {getDetailBooking} from '../../../redux/actions/DetailBooking.js';
 import moment from 'moment';
 
-function DetailBooking({ route, navigation }) {
-  const { id } = route.params;
-  const { token } = useSelector((s) => s.Auth);
-  const { data } = useSelector((s) => s.DetailBooking);
+function DetailBooking({route, navigation}) {
+  const {id} = route.params;
+  const {token} = useSelector((s) => s.Auth);
+  const {data} = useSelector((s) => s.DetailBooking);
   const [loading, setLoading] = useState(true);
-  const { username, type, departure_at, gate, unique_code } = data;
+  const {username, type, departure_at, gate, unique_code} = data;
   console.log(data);
   console.log('data di profile');
   const [date, setDate] = useState(new Date());
@@ -51,7 +51,7 @@ function DetailBooking({ route, navigation }) {
     <Fragment>
       <StatusBar backgroundColor="#2395FF" barStyle="light-content" animated />
 
-      <ScrollView style={{ backgroundColor: '#2395FF' }}>
+      <ScrollView style={{backgroundColor: '#2395FF'}}>
         <NavigationDotted
           pageTitle="Booking Pass"
           onPress={() => navigation.pop()}
@@ -63,10 +63,9 @@ function DetailBooking({ route, navigation }) {
               <View>
                 <Image
                   source={{
-                    uri:
-                      data.airport_photo,
+                    uri: data.airport_photo,
                   }}
-                  style={{ width: null, height: 70, flex: 1 }}
+                  style={{width: null, height: 70, flex: 1}}
                   resizeMode="contain"
                 />
               </View>
@@ -81,7 +80,7 @@ function DetailBooking({ route, navigation }) {
                   <Text style={styles.destinationText}>{data.from}</Text>
                 </View>
 
-                <View style={{ marginHorizontal: 20 }}>
+                <View style={{marginHorizontal: 20}}>
                   <Icon name="plane-departure" size={25} color="#979797" />
                 </View>
 
@@ -91,16 +90,25 @@ function DetailBooking({ route, navigation }) {
               </View>
 
               <View style={styles.makeColumn}>
-                <View style={[styles.boxStatus, { backgroundColor: data.status === 0 ? "#FF7F23" : "#4FCF4D" }]}>
-                  <Text style={styles.statusDesc}>{data.status === 0 ? "Wait for payment" : "Success"}</Text>
+                <View
+                  style={[
+                    styles.boxStatus,
+                    {
+                      backgroundColor:
+                        data.status === 0 ? '#FF7F23' : '#4FCF4D',
+                    },
+                  ]}>
+                  <Text style={styles.statusDesc}>
+                    {data.status === 0 ? 'Wait for payment' : 'Success'}
+                  </Text>
                 </View>
               </View>
 
-              <View style={{ paddingTop: 20 }}>
+              <View style={{paddingTop: 20}}>
                 <View style={styles.horizontalLine} />
               </View>
 
-              <View style={{ flex: 2 }}>
+              <View style={{flex: 2}}>
                 <View
                   style={{
                     flex: 1,
@@ -110,19 +118,19 @@ function DetailBooking({ route, navigation }) {
                     marginTop: 20,
                     marginHorizontal: 36,
                   }}>
-                  <View style={{ flexDirection: 'column', flexBasis: 100 }}>
+                  <View style={{flexDirection: 'column', flexBasis: 100}}>
                     <Text style={styles.textTitle}>Passenger</Text>
                     <Text style={styles.textSub}>{username}</Text>
                   </View>
 
-                  <View style={{ flexDirection: 'column', flexBasis: 100 }}>
+                  <View style={{flexDirection: 'column', flexBasis: 100}}>
                     <Text style={styles.textTitle}>Class</Text>
                     <Text style={styles.textSub}>
                       {type === 1
                         ? 'Economy'
                         : type === 2
-                          ? 'Business'
-                          : 'First Class'}
+                        ? 'Business'
+                        : 'First Class'}
                     </Text>
                   </View>
                 </View>
@@ -136,14 +144,14 @@ function DetailBooking({ route, navigation }) {
                     marginTop: 20,
                     marginHorizontal: 36,
                   }}>
-                  <View style={{ flexDirection: 'column', flexBasis: 100 }}>
+                  <View style={{flexDirection: 'column', flexBasis: 100}}>
                     <Text style={styles.textTitle}>Departure</Text>
                     <Text style={styles.textSub}>
                       {formatDateView(departure_at)}
                     </Text>
                   </View>
 
-                  <View style={{ flexDirection: 'column', flexBasis: 100 }}>
+                  <View style={{flexDirection: 'column', flexBasis: 100}}>
                     <Text style={styles.textTitle}>Time</Text>
                     <Text style={styles.textSub}>
                       {departure_at
@@ -162,40 +170,37 @@ function DetailBooking({ route, navigation }) {
                     marginTop: 20,
                     marginHorizontal: 36,
                   }}>
-                  <View style={{ flexDirection: 'column', flexBasis: 100 }}>
+                  <View style={{flexDirection: 'column', flexBasis: 100}}>
                     <Text style={styles.textTitle}>Gate</Text>
                     <Text style={styles.textSub}>{gate}</Text>
                   </View>
 
-                  <View style={{ flexDirection: 'column', flexBasis: 100 }}>
+                  <View style={{flexDirection: 'column', flexBasis: 100}}>
                     <Text style={styles.textTitle}>Seat</Text>
                     <Text style={styles.textSub}>21 B</Text>
                   </View>
                 </View>
               </View>
 
-              {
-                data.status == 1 ? (
-                  <>
-                    <View style={{ paddingTop: 20 }}>
-                      <View style={styles.horizontalLine} />
-                    </View>
+              {data.status == 1 ? (
+                <>
+                  <View style={{paddingTop: 20}}>
+                    <View style={styles.horizontalLine} />
+                  </View>
 
-                    <View style={{ marginTop: 20, alignItems: 'center' }}>
-                      <Barcode
-                        format="CODE128"
-                        value={unique_code ? unique_code : 'No Fill'}
-                        height={68}
-                        width={1.9}
-                      />
-                      <View style={styles.makeColumn}>
-                        <Text>{unique_code ? unique_code : 'No Fill'}</Text>
-                      </View>
+                  <View style={{marginTop: 20, alignItems: 'center'}}>
+                    <Barcode
+                      format="CODE128"
+                      value={unique_code ? unique_code : 'No Fill'}
+                      height={68}
+                      width={1.9}
+                    />
+                    <View style={styles.makeColumn}>
+                      <Text>{unique_code ? unique_code : 'No Fill'}</Text>
                     </View>
-                  </>
-                ) : null
-              }
-
+                  </View>
+                </>
+              ) : null}
             </View>
           </View>
         </View>

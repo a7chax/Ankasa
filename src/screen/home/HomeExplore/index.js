@@ -70,7 +70,9 @@ const HomeExplore = (props) => {
       <Text style={[styles.appBarTitle]}>Explore</Text>
 
       <View style={[styles.appBarRight]}>
-        <TouchableOpacity activeOpacity={0.6}>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Chat')}
+          activeOpacity={0.6}>
           <Icons
             name="mail"
             size={28}
@@ -79,7 +81,9 @@ const HomeExplore = (props) => {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity activeOpacity={0.6}>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Notification')}
+          activeOpacity={0.6}>
           <Icons
             name="bell"
             size={28}

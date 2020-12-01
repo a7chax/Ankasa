@@ -17,13 +17,9 @@ export const GetCity = (callback) => async (dispatch) => {
   callback(res);
 };
 
-export const getSearchFlight = (query, fields, callback) => async (
-  dispatch,
-) => {
-  const headers = {headers: {Authorization: fields}};
+export const getSearchFlight = (type, id, callback) => async (dispatch) => {
   const res = await Axios.get(
-    `${API_URI}/public/destination/find?q=${query}&limit=99&offset=1`,
-    headers,
+    `${API_URI}/public/classes?type=${type}&id_destination=${id}`,
   );
   // console.log('data transfer redux',res.data)
   dispatch({type: 'GET_FLIGHT_RESULT', payload: res.data.data});
