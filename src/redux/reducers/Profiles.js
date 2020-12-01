@@ -10,13 +10,6 @@ const Profiles = (state = initialState, action = {}) => {
         data: action.payload,
       };
 
-    // case 'AUTHLOGOUT':
-    //   return {
-    //     ...state,
-    //     token: '',
-    //     isLogin: false,
-    //   };
-
     default:
       return state;
   }

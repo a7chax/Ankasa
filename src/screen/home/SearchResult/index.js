@@ -41,7 +41,7 @@ const SearchResult = (props) => {
   const berasal = asal.substring(0,3)
   const bertujuan = tujuan.substring(0,3)
   useEffect(() => {
-    dispatch(getSearchFlight('Singapore', token ))
+    dispatch(getSearchFlight(tujuan, token ))
 
     console.log(searchData, '                    ini search data                  ')
 
