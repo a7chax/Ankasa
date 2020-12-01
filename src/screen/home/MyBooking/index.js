@@ -1,16 +1,36 @@
 import React, {useState, useEffect} from 'react';
-import {ScrollView, View, Text, TouchableOpacity} from 'react-native';
+import {ScrollView, View, Text, TouchableOpacity, FlatList} from 'react-native';
 import {Button} from 'react-native-paper';
 import {MobileNavigation} from '../../../components/';
 import styles from './mybooking.style.js';
 import {TicketBackgroundSmall} from '../../../assets';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icons from 'react-native-vector-icons/Feather';
+import {useSelector, useDispatch} from 'react-redux';
+import {GetMyBooking} from '../../../redux/actions/MyBooking';
+import moment from 'moment';
 
-function MyBooking() {
+function MyBooking(props) {
+  const {data} = useSelector((s) => s.MyBooking);
+  const {token} = useSelector((s) => s.Auth);
+  const [loading, setLoading] = useState(true);
+  // const {username, city} = data;
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    
+    const callbackHandler = (err) => {
+      setLoading(false);
+      if (err) return false;
+      console.log(data);
+      console.log('data');
+    };
+    dispatch(GetMyBooking(token, callbackHandler));
+  }, []);
+
   const AppBar = () => (
     <View style={[styles.appBar]}>
-      <Text style={[styles.appBarTitle]}>Explore</Text>
+      <Text style={[styles.appBarTitle]}>My Booking</Text>
 
       <View style={[styles.appBarRight]}>
         <TouchableOpacity activeOpacity={0.6}>
@@ -34,15 +54,26 @@ function MyBooking() {
     </View>
   );
 
-  return (
-    <ScrollView style={{backgroundColor: '#FFFFFF'}}>
-      <AppBar />
 
-      <View style={styles.makeColumn}>
+  function formatDateView(param) {
+    const dateString = param;
+    const dateObj = new Date(dateString);
+    const momentObj = moment(dateObj);
+    const momentString = momentObj.format('dddd, D MMMM YYYY');
+
+    return momentString;
+  }
+
+  const renderItem = ({item, index}) =>{
+    return(
+      <>
+       <TouchableOpacity 
+      onPress={(() => {props.navigation.navigate('DetailBooking', {id:item.id})})}
+      style={styles.makeColumn}>
         <View style={styles.boxTicket}>
           <View style={styles.ineerCardPos}>
             <View>
-              <Text style={styles.dateTicket}>Monday, 20 July ‘20 - 12:33</Text>
+            <Text style={styles.dateTicket}>{formatDateView(item.departure_at)}</Text>
             </View>
 
             <View
@@ -78,8 +109,19 @@ function MyBooking() {
             </View>
           </View>
         </View>
-      </View>
-    </ScrollView>
+      </TouchableOpacity>
+      </>
+    )
+  }
+  return (
+    <View style={{backgroundColor: '#FFFFFF'}}>
+      <AppBar />
+
+     <FlatList
+     data={data}
+     renderItem={renderItem}
+     />
+    </View>
   );
 }
 

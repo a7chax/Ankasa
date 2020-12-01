@@ -24,6 +24,7 @@ function FlightDetail() {
   const { data } = useSelector((state) => state.DetailFlight);
   // const { items } = route.params;
 
+
 	const getDetailFlight = () => {
 		setLoading(true);
 		const callbackHandler = (err, res) => {

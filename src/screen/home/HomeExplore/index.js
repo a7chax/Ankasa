@@ -58,6 +58,7 @@ const HomeExplore = (props) => {
     );
   }
 
+
   const AppBar = () => (
     <View style={[styles.appBar]}>
       <Text style={[styles.appBarTitle]}>Explore</Text>
@@ -84,14 +85,23 @@ const HomeExplore = (props) => {
     </View>
   );
 
+
+  const gotoSearch = () => {
+    props.navigation.push('SearchFlight')
+  }
+
+
   const SearchBox = () => (
     <View style={[styles.searchBox]}>
       <Icons name="search" size={28} color="#A3A3A3" />
+      <TouchableOpacity onPress={() => gotoSearch()}>
       <TextInput
+        editable={false}
         onChangeText={(text) => console.log(text)}
         placeholder="Where you want to go?"
         style={{width: '91%', marginLeft: 8}}
       />
+      </TouchableOpacity>
     </View>
   );
 

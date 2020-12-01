@@ -5,6 +5,8 @@ import DetailFlight from './DetailFlight';
 import Destination from './Destination';
 import DetailBooking from './DetailBooking';
 import EditProfile from './EditProfile';
+import Booking from './Booking'
+import MyBooking from './MyBooking';
 
 const reducers = combineReducers({
   Auth,
@@ -13,6 +15,8 @@ const reducers = combineReducers({
   Destination,
   DetailBooking,
   EditProfile,
+  Booking,
+  MyBooking
 });
 
 export default reducers;

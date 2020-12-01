@@ -17,7 +17,8 @@ import {
   StatusBar,
   Picker,
   TouchableNativeFeedback,
-  TouchableHighlight
+  TouchableHighlight,
+  TextInput
 } from 'react-native';
 import {
   Avatar,
@@ -29,7 +30,7 @@ import {
   Title,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Feather';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {RectButton} from 'react-native-gesture-handler';
 import styles from './searchflight.style.js'
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -37,6 +38,8 @@ import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-
 import DatePicker from 'react-native-date-picker';
 import RBSheet from "react-native-raw-bottom-sheet";
 import moment from "moment";
+import {GetCity} from '../../../redux/actions/Booking'
+import {GetProfile} from '../../../redux/actions/Profiles';
 
 
 
@@ -63,21 +66,33 @@ const tomorrow = new Date()
   const [adult, setAdult] = useState(1)
   const [from, setFrom] = useState('')
   const [to, setTo] = useState('')
-  const [classSuite, setClassSuite] = useState(['Economy', 'Business', 'FirstClass'])
+  const [classSuite, setClassSuite] = useState('Economy')
   const [date, setDate] = useState(new Date())
   const [departDate ,setDepartDate] = useState(todayMoment)
   const [returnDate, setReturnDate] = useState(todayMoment.clone().add(1,'days'))
-  const [asalVisible, setAsalVisible] = useState(false)
-  const [tujuanVisible, setTujuanVisible] = useState(false)
+
   const [tujuan, setTujuan] = useState('')
   const [asal, setAsal] = useState('')
 
 
   const refRBSheetDepart = useRef();
   const refRBSheetReturn = useRef();
+  const refRBSheetAsal = useRef()
+  const refRBSheetTujuan = useRef();
 
 let controller;
 
+  const setGoto = (city) => {
+    setTujuan(city)
+  }
+
+  const setFromto = (city) => {
+    setAsal(city)
+  }
+
+  const submitSearch = () => {
+
+  }
 
       function formatDateView(param){
         const dateString = param
@@ -90,29 +105,44 @@ let controller;
       const departDateView = formatDateView(departDate);
       const returnDateView = formatDateView(returnDate);
 
-  useEffect(() => {
-      StatusBar.setBarStyle("light-content");
-      if (Platform.OS === "android") {
-        StatusBar.setBackgroundColor("rgba(0,0,0,0)");
-        StatusBar.setTranslucent(true);
+      const {data} = useSelector((s) => s.Profiles);
+      const {token} = useSelector((s) => s.Auth);
+      const Booking = useSelector((s) => s.Booking)
+
+
+      const searchResult = () => {
+        props.navigation.navigate('SearchResult', {depart : departDateView, tujuan : tujuan, asal : asal, child : child, adult : adult ,classSuite : classSuite})
       }
 
+    useEffect(() => {
+
+      dispatch(GetCity())
+
+      
+
+      
+      
+    return () => {
+      
+    };
+      
+
+  }, [])
 
 
-    return () => {      
-        console.log(tujuanVisible)
-    };              
-
-  }, )
 
 const onPress = () => {
 
 }
 
+const kembali = () => {
+      props.navigation.goBack('Home')
+}
+
 var radio_props = [
-  {label: 'Economy', value: 'economy' },
-  {label: 'Business', value: 'business' },
-  {label: 'First Class', value: 'firstClass' }
+  {label: 'Economy', value: 'Economy' },
+  {label: 'Business', value: 'Business' },
+  {label: 'First Class', value: 'First Class' }
 ];
 
   return (
@@ -137,10 +167,12 @@ var radio_props = [
           <View style={{padding: 15, marginTop : 10}}>
             <View style={{flexDirection: 'row'}}>
               <View style={{flex: 1, justifyContent: 'center'}}>
+                <TouchableNativeFeedback onPress={() => kembali()}>
                 <Image
                   style={{left: 15, top: 20}}
                   source={require('../../../assets/illustration/btnback.png')}
                 />
+                </TouchableNativeFeedback>
               </View>
               <View
                 style={{
@@ -172,36 +204,40 @@ var radio_props = [
         <View style={{position: 'absolute', width: '96%', height: 100, padding: 15, top: 210, left: '2%', }}> 
           <View style={{backgroundColor: '#fff', elevation: 5, borderRadius: 12, width: '100%', height: 100, }}> 
 
-            <TouchableOpacity onPress={() => setTujuanVisible(true)}>
               <View>
               <Text style={{position: 'absolute', left: 20, top: 20, fontSize: 12, fontFamily: 'Lato-Regular', color: '#979797', }}>
                 From
               </Text>
+            <TouchableNativeFeedback onPress={() => refRBSheetAsal.current.open()}>
               <Text style={{position: 'absolute', left: 20, top: 40, fontSize: 20, fontFamily: 'Poppins-SemiBold', color: '#000000', }}>
-                Medan 
+                {asal == '' ?  setAsal(data.city) : asal}
              </Text>
+            </TouchableNativeFeedback>
               <Text style={{position: 'absolute', left: 20, top: 70, fontSize: 12, fontFamily: 'Lato-Regular', color: '#979797', }}>
                 Indonesia
               </Text>
             </View> 
-            </TouchableOpacity>
 
             <Image
               source={require('../../../assets/illustration/switch2.png')}
               style={{position: 'absolute', left: '50%', top: '50%'}}
             />
 
-            <Text style={{position: 'absolute', top: 20, right: '0%', fontSize: 12, right: 20, fontFamily: 'Lato-Regular', color: '#979797', }}>
-              To
-            </Text>
+            <View>
+              <Text style={{position: 'absolute', top: 20, right: '0%', fontSize: 12, right: 20, fontFamily: 'Lato-Regular', color: '#979797', }}>
+                To
+              </Text>
 
-            <Text style={{position: 'absolute', top: 40, fontSize: 20, right: '0%', right: 20, fontFamily: 'Poppins-SemiBold', color: '#000000', }}> 
-              Tokyo
-            </Text>
+            <TouchableNativeFeedback onPress={() => refRBSheetTujuan.current.open()}>  
+              <Text style={{position: 'absolute', top: 40, fontSize: 20, right: '0%', right: 20, fontFamily: 'Poppins-SemiBold', color: '#000000', }}> 
+              {tujuan == '' ?  setTujuan( Booking.data[0].name) : tujuan}
+              </Text>
+            </TouchableNativeFeedback>
 
-            <Text style={{position: 'absolute', top: 70, fontSize: 12, right: '0%', right: 20, fontFamily: 'Lato-Regular', color: '#979797', }}> 
-              Japan
-            </Text>
+              <Text style={{position: 'absolute', top: 70, fontSize: 12, right: '0%', right: 20, fontFamily: 'Lato-Regular', color: '#979797', }}> 
+                Indonesia
+              </Text>
+            </View>
 
           </View>
         </View>
@@ -364,7 +400,7 @@ var radio_props = [
       <RBSheet
         ref={refRBSheetDepart}
         closeOnDragDown={true}
-        closeOnPressMask={false}
+        closeOnPressMask={true}
         customStyles={{
           wrapper: {
             backgroundColor: "transparent"
@@ -405,16 +441,100 @@ var radio_props = [
       </View>      
       </RBSheet>
 
-      <Modal animationType='slide' visible={tujuanVisible}>
-        <View>
-          <Text>ini visible</Text>
-        </View>
-      </Modal>
+
+      <RBSheet
+        ref={refRBSheetAsal}
+        closeOnDragDown={true}
+        closeOnPressMask={true}
+
+        height={720}        
+        customStyles={{
+          wrapper: {
+            backgroundColor: "transparent"
+          },
+          draggableIcon: {
+            backgroundColor: "#000"
+          }
+        }}
+      >
+      <View style={{flexDirection : 'column'}}>
+        <TextInput style={{borderColor : '#adadad', borderWidth : 1, borderRadius : 10, marginHorizontal : 20, marginBottom : 20, marginTop : 20 }}>
+          
+        </TextInput>
+        <View style={{borderColor : '#a1a1a1', borderBottomWidth : 1, paddingTop :5}}/>
+        <ScrollView>
+        { Booking.data.map(item => {
+          return(
+            <TouchableNativeFeedback  onPress={() => setFromto(item.name)}>
+              <View style={{borderColor : '#a1a1a1', borderBottomWidth : 1, height : 70, paddingTop :5}} key={item.id}>
+                <View style={{flexDirection : 'column', marginHorizontal : 20}}>
+                <Text style={{fontFamily : 'Lato-Bold', fontSize : 14, color : 'black', lineHeight : 26}}>{item.name}, Indonesia</Text>
+                <Text style={{fontFamily : 'Lato-Regular', fontSize : 17, color : 'black', lineHeight : 26, marginBottom : 10}}>International Airport</Text>
+                </View>
+              </View>              
+            </TouchableNativeFeedback>
+            )
+
+        })
+
+        }
+
+         
+
+      </ScrollView>
+      </View>         
+      </RBSheet>      
+
+      <RBSheet
+        ref={refRBSheetTujuan}
+        closeOnDragDown={false}
+        closeOnPressMask={true}
+
+        height={720}        
+        customStyles={{
+          wrapper: {
+            backgroundColor: "transparent"
+          },
+          draggableIcon: {
+            backgroundColor: "#000"
+          }
+        }}
+      >
+      
+        
+      <View style={{flexDirection : 'column'}}>
+        <TextInput style={{borderColor : '#adadad', borderWidth : 1, borderRadius : 10, marginHorizontal : 20, marginBottom : 20, marginTop : 20 }}>
+          
+        </TextInput>
+        <View style={{borderColor : '#a1a1a1', borderBottomWidth : 1, paddingTop :5}}/>
+        <ScrollView>
+        { Booking.data.map(item => {
+          return(
+            <TouchableNativeFeedback  onPress={() => setGoto(item.name)}>
+              <View style={{borderColor : '#a1a1a1', borderBottomWidth : 1, height : 70, paddingTop :5}} key={item.id}>
+                <View style={{flexDirection : 'column', marginHorizontal : 20}}>
+                <Text style={{fontFamily : 'Lato-Bold', fontSize : 14, color : 'black', lineHeight : 26}}>{item.name}, Indonesia</Text>
+                <Text style={{fontFamily : 'Lato-Regular', fontSize : 17, color : 'black', lineHeight : 26, marginBottom : 10}}>International Airport</Text>
+                </View>
+              </View>              
+            </TouchableNativeFeedback>
+            )
+
+        })
+
+        }
+
+         
+
+      </ScrollView>
+      </View>      
+      </RBSheet>  
+    
 
 
 
         <View style={{flex: 1, padding: 15}}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => searchResult()}>
             <Text
               style={{
 
