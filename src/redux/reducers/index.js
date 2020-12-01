@@ -4,6 +4,7 @@ import Profiles from './Profiles';
 import Booking from './Booking'
 import Destination from './Destination';
 import DetailBooking from './DetailBooking';
+import MyBooking from './MyBooking';
 
 
 const reducers = combineReducers({
@@ -12,6 +13,7 @@ const reducers = combineReducers({
   Booking,
   Destination,
   DetailBooking,
+  MyBooking
 });
 
 export default reducers;
