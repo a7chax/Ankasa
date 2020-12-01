@@ -12,10 +12,15 @@ import {
 import Icons from 'react-native-vector-icons/Feather';
 import Icons2 from 'react-native-vector-icons/FontAwesome';
 import Carousel from 'react-native-snap-carousel';
+import {useSelector} from 'react-redux';
 
 const {width} = Dimensions.get('screen');
 
 const HomeProfile = () => {
+  const {data} = useSelector((s) => s.Profiles);
+  const {username, city} = data;
+  const dispatch = useDispatch();
+
   const AppBar = () => (
     <View style={[styles.appBar]}>
       <Text style={[styles.appBarTitle]}>Profile</Text>
@@ -53,14 +58,18 @@ const HomeProfile = () => {
       </View>
 
       <Text style={[styles.title, {fontSize: 20, color: 'black'}]}>
-        Mike Kowalski
+        {username}
       </Text>
 
       <Text style={{fontFamily: 'Poppins-Regular', fontSize: 14}}>
-        Medan, Indonesia
+        {city}, Indonesia
       </Text>
     </View>
   );
+
+  const onLogout = () => {
+    dispatch({type: 'AUTHLOGOUT'});
+  };
 
   const Content = () => (
     <>
@@ -157,7 +166,8 @@ const HomeProfile = () => {
             marginVertical: 2,
             flexDirection: 'row',
             alignItems: 'center',
-          }}>
+          }}
+          onPress={onLogout}>
           <Icons2 name="sign-out" size={24} color="#F24545" />
           <Text
             style={{
