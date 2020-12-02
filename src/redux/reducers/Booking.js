@@ -1,6 +1,6 @@
 const initalState = {
-  data : '',
-  searchData : [],
+  data: [],
+  searchData: [],
 };
 
 const Booking = (state = initalState, action = {}) => {
@@ -10,11 +10,11 @@ const Booking = (state = initalState, action = {}) => {
         ...state,
         data: action.payload,
       };
-    case 'GET_FLIGHT_RESULT' :
+    case 'GET_FLIGHT_RESULT':
       return {
         ...state,
-        searchData : action.payload
-      }
+        searchData: action.payload,
+      };
 
     default:
       return state;

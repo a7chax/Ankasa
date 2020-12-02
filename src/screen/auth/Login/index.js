@@ -93,7 +93,11 @@ const Login = ({navigation}) => {
         </View>
 
         <Text style={{margin: '2%'}}>Did you forgot your password?</Text>
-        <Text style={styles.Text3}>Tap here for reset</Text>
+        <Text
+          onPress={() => navigation.navigate('ForgotPassword')}
+          style={styles.Text3}>
+          Tap here for reset
+        </Text>
 
         <Image
           style={{marginTop: '10%'}}

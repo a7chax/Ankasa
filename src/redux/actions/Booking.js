@@ -12,9 +12,14 @@ const handleError = (error) => {
 };
 
 export const GetCity = (callback) => async (dispatch) => {
-  const res = await Axios.get(`${API_URI}/public/city`);
-  dispatch({type: 'GET_CITY', payload: res.data.data});
-  callback(res);
+  try {
+    const res = await Axios.get(`${API_URI}/public/city`);
+    dispatch({type: 'GET_CITY', payload: res.data.data});
+    callback(res.data.data);
+  } catch (error) {
+    console.log(error);
+    callback(error.response.data);
+  }
 };
 
 export const getSearchFlight = (type, id, callback) => async (dispatch) => {

@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {ScrollView, View, Text, TouchableOpacity, FlatList} from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  RefreshControl,
+} from 'react-native';
 import {Button} from 'react-native-paper';
 import {MobileNavigation} from '../../../components/';
 import styles from './mybooking.style.js';
@@ -32,6 +39,11 @@ function MyBooking({navigation}) {
   };
 
   React.useEffect(() => {
+    LoadBooking();
+  }, []);
+
+  const LoadBooking = () => {
+    setLoading(true);
     const callbackHandler = (err) => {
       setLoading(false);
       if (err) return false;
@@ -39,7 +51,7 @@ function MyBooking({navigation}) {
       // console.log('data');
     };
     dispatch(GetMyBooking(token, callbackHandler));
-  }, []);
+  };
 
   const AppBar = () => (
     <View style={[styles.appBar]}>
@@ -145,8 +157,15 @@ function MyBooking({navigation}) {
       <AppBar />
 
       <FlatList
+        refreshControl={
+          <RefreshControl
+            colors={['#9Bd35A', '#689F38']}
+            refreshing={loading}
+            onRefresh={LoadBooking}
+          />
+        }
+        ListEmptyComponent={() => <Text>Kosong Bro</Text>}
         data={data}
-        inverted={true}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />

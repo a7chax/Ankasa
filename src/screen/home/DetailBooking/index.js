@@ -193,7 +193,7 @@ function DetailBooking({route, navigation}) {
                       format="CODE128"
                       value={unique_code ? unique_code : 'No Fill'}
                       height={68}
-                      width={1.9}
+                      width={1.12}
                     />
                     <View style={styles.makeColumn}>
                       <Text>{unique_code ? unique_code : 'No Fill'}</Text>

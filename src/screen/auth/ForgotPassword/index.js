@@ -19,7 +19,7 @@ function ForgotPassword(props) {
   };
   return (
     <ScrollView style={{backgroundColor: '#FFFFFF'}}>
-      <Navigation onPress={() => backTo()} />
+      <Navigation onPress={() => props.navigation.pop()} />
       <View style={styles.makeColumn}>
         <View>
           <Text style={styles.textLarge}>Forgot Password</Text>

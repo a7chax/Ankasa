@@ -72,7 +72,7 @@ const SearchFlight = (props) => {
   );
 
   const [tujuan, setTujuan] = useState('');
-  const [asal, setAsal] = useState('');
+  const [asal, setAsal] = useState('Bogor');
 
   const refRBSheetDepart = useRef();
   const refRBSheetReturn = useRef();
