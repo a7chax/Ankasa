@@ -164,7 +164,11 @@ function MyBooking({navigation}) {
             onRefresh={LoadBooking}
           />
         }
-        ListEmptyComponent={() => <Text>Kosong Bro</Text>}
+        ListEmptyComponent={() => (
+          <Text style={{alignSelf: 'center', marginTop: 20}}>
+            Belum ada data
+          </Text>
+        )}
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
