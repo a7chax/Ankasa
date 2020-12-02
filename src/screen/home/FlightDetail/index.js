@@ -323,7 +323,7 @@ function FlightDetail(props) {
             horizontal={true}
             style={{marginTop: 15, marginLeft: 15}}
             showsHorizontalScrollIndicator={false}>
-            <Facilities />
+            <Facilities classType={classSuite} />
           </ScrollView>
 
           <View
