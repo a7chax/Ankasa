@@ -9,7 +9,11 @@ const Profiles = (state = initialState, action = {}) => {
         ...state,
         data: action.payload,
       };
-
+    case 'UPLOADPHOTO':
+      return {
+        ...state,
+        data: action.payload,
+      };
     default:
       return state;
   }

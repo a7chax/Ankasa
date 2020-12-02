@@ -28,16 +28,18 @@ const GetProfile = (token, callback) => (dispatch) => {
     });
 };
 
-// const AuthRegister = (data, callback) => {
-//   axios
-//     .post('/auth/register', data)
-//     .then((response) => {
-//       callback(false, response); // isError, response
-//     })
-//     .catch((error) => {
-//       callback(true, error); // isError, response
-//       return handleError(error);
-//     });
-// };
+const UploadPhoto = (data, token) => async dispatch => {
+  try {
+    const header = {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
+    }
+    const res = await Axios.patch(`${API_URI}/users/photo`, data, header)
+  } catch (error) {
+    dispatch({ type: 'UPLOADPHOTO', payload: error })
+  }
+}
 
-export {GetProfile};
+
+export {GetProfile, UploadPhoto};
