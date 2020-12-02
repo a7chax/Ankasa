@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, View, Text} from 'react-native';
+import {ScrollView, View, Text, ActivityIndicator} from 'react-native';
 import styles from './notification.style.js';
 import {Navigation} from '../../../components/';
 import {useSelector, useDispatch} from 'react-redux';
@@ -8,6 +8,7 @@ import moment from 'moment';
 
 function Notification({navigation}) {
   const clearNotification = () => {};
+  const [loading, setLoading] = useState(false);
 
   const {token} = useSelector((state) => state.Auth);
   const {dataNotif} = useSelector((state) => state.DetailBooking);
@@ -19,10 +20,25 @@ function Notification({navigation}) {
   };
 
   useEffect(() => {
-    dispatch(getNotif(token, (res) => console.log(res.data.data)));
+    setLoading(true);
+    dispatch(getNotif(token, (res) => setLoading(false)));
 
     // console.log(dataNotif)
   }, []);
+
+  if (loading) {
+    return (
+      <View
+        style={{
+          justifyContent: 'center',
+          flex: 1,
+          alignItems: 'center',
+          backgroundColor: '#fff',
+        }}>
+        <ActivityIndicator size="small" color="#2395FF" />
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={{backgroundColor: '#FFFFFF'}}>
@@ -42,9 +58,9 @@ function Notification({navigation}) {
         {dataNotif.length ? null : (
           <Text style={{fontSize: 19}}>Data tidak ditemukan</Text>
         )}
-        {dataNotif.map((item) => {
+        {dataNotif.map((item, index) => {
           return (
-            <View style={styles.boxNotif}>
+            <View key={index} style={styles.boxNotif}>
               <View style={styles.innerNotifPos}>
                 <View>
                   <Text style={styles.notifTitle}>{item.title}</Text>

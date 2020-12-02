@@ -24,7 +24,7 @@ const {width} = Dimensions.get('screen');
 const HomeProfile = (props) => {
   const {data} = useSelector((s) => s.Profiles);
   const {token} = useSelector((s) => s.Auth);
-  const [photo, setPhoto] = useState('')
+  const [photo, setPhoto] = useState('');
   const [loading, setLoading] = useState(true);
   const {username, city} = data;
   const dispatch = useDispatch();
@@ -51,20 +51,20 @@ const HomeProfile = (props) => {
 
   useEffect(() => {
     if (newImage !== null) handleEdit();
-    console.log(data, 'data')
+    console.log(data, 'data');
   }, [newImage]);
 
   const handleEdit = () => {
-    let data = {photo: photo}
+    let data = {photo: photo};
 
-    dispatch(UploadPhoto(data, token))
-    ToastAndroid.show('Success upload photo', ToastAndroid.SHORT)
+    dispatch(UploadPhoto(data, token));
+    ToastAndroid.show('Success upload photo', ToastAndroid.SHORT);
 
     const callbackHandler = (err) => {
       if (err) return false;
     };
     dispatch(GetProfile(token, callbackHandler));
-  }
+  };
 
   const gotoEditProfile = () => {
     props.navigation.navigate('EditProfile');
