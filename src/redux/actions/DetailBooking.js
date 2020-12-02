@@ -31,3 +31,14 @@ const getDetailBooking = (id, token, callback) => (dispatch) => {
 };
 
 export {getDetailBooking};
+
+
+
+
+export const getNotif = (token) => async dispatch => {
+  const header = { headers: {
+          'Authorization': `Bearer ${token}`,
+      }}
+  const res = await AxiosBase.get(`${API_URI}/users/notification`, header)
+  dispatch({type : 'GET_NOTIF', payload : res.data.data[0]})
+}

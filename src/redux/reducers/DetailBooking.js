@@ -1,5 +1,6 @@
 const initialState = {
   data: {},
+  dataNotif : ''
 };
 
 const DetailBooking = (state = initialState, action = {}) => {
@@ -11,6 +12,12 @@ const DetailBooking = (state = initialState, action = {}) => {
         ...state,
         data: action.payload,
       };
+    case 'GET_NOTIF':
+      return {
+        ...state,
+        dataNotif: action.payload,
+      };
+
 
     default:
       return state;

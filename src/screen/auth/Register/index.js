@@ -147,7 +147,7 @@ const Register = ({navigation}) => {
           <TouchableOpacity
             disabled={loading}
             loading={loading}
-            onPress={() => props.navigation.navigate('Login')}>
+            onPress={() => navigation.navigate('Login')}>
             <Text style={styles.signin}>Sign In</Text>
           </TouchableOpacity>
         </View>
