@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,27 +9,51 @@ import {
   Image,
   ScrollView,
   StatusBar,
+  Alert,
 } from 'react-native';
 import Icons from 'react-native-vector-icons/Feather';
 import Icons2 from 'react-native-vector-icons/FontAwesome';
 import Carousel from 'react-native-snap-carousel';
-import { useSelector, useDispatch } from 'react-redux';
-import { GetProfile } from '../../../redux/actions/Profiles';
+import {useSelector, useDispatch} from 'react-redux';
+import {GetProfile} from '../../../redux/actions/Profiles';
+import ImagePicker from 'react-native-image-picker';
 
-const { width } = Dimensions.get('screen');
+const {width} = Dimensions.get('screen');
 
 const HomeProfile = (props) => {
-  const { data } = useSelector((s) => s.Profiles);
-  const { token } = useSelector((s) => s.Auth);
+  const {data} = useSelector((s) => s.Profiles);
+  const {token} = useSelector((s) => s.Auth);
   const [loading, setLoading] = useState(true);
-  const { username, city } = data;
+  const {username, city} = data;
   const dispatch = useDispatch();
 
+  const [newImage, setNewImage] = useState(null);
+  const handleChoosePhoto = () => {
+    console.log('test');
+    const options = {
+      noData: true,
+    };
+    ImagePicker.showImagePicker(options, (response) => {
+      if (response.uri) {
+        if (response.fileSize > 1024 * 1024 * 3) {
+          Alert.alert(
+            'Image size is too large.',
+            'The maximum size is 3 MB. Please choose another image.',
+          );
+        } else {
+          setNewImage(response);
+        }
+      }
+    });
+  };
 
+  useEffect(() => {
+    // if (newImage !== null) handleEdit();
+  }, [newImage]);
 
   const gotoEditProfile = () => {
-    props.navigation.navigate('EditProfile')
-  }
+    props.navigation.navigate('EditProfile');
+  };
 
   React.useEffect(() => {
     const callbackHandler = (err) => {
@@ -39,14 +63,12 @@ const HomeProfile = (props) => {
       // navigation.replace('HomeProfile');
     };
     dispatch(GetProfile(token, callbackHandler));
-    return () => {
-
-    }
+    return () => {};
   }, []);
 
   const onLogout = () => {
-    dispatch({ type: 'AUTHLOGOUT' });
-    navigation.replace('Auth');
+    dispatch({type: 'AUTHLOGOUT'});
+    props.navigation.replace('Auth');
   };
 
   const AppBar = () => (
@@ -55,7 +77,7 @@ const HomeProfile = (props) => {
 
       <View style={[styles.appBarRight]}>
         <TouchableOpacity activeOpacity={0.6} onPress={() => gotoEditProfile()}>
-          <Text style={[styles.title, { color: '#2395FF', fontSize: 18 }]}>
+          <Text style={[styles.title, {color: '#2395FF', fontSize: 18}]}>
             Edit
           </Text>
         </TouchableOpacity>
@@ -64,7 +86,7 @@ const HomeProfile = (props) => {
   );
 
   const Profile = () => (
-    <View style={{ alignItems: 'center' }}>
+    <View style={{alignItems: 'center'}}>
       <View
         style={{
           justifyContent: 'center',
@@ -76,22 +98,32 @@ const HomeProfile = (props) => {
           borderColor: '#2395FF',
           borderRadius: 55,
         }}>
-        <Image
-          source={{
-            uri:
-              'https://images.unsplash.com/photo-1542931287-023b922fa89b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8N3x8dG9reW98ZW58MHx8MHw%3D&auto=format&fit=crop&w=500&q=60',
-          }}
-          style={{ width: 95, height: 95, borderRadius: 50 }}
-        />
+        {newImage ? (
+          <TouchableOpacity onPress={() => handleChoosePhoto()}>
+            <Image
+              source={{uri: `${newImage.uri}`}}
+              style={{width: 95, height: 95, borderRadius: 50}}
+            />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity onPress={() => handleChoosePhoto()}>
+            <Image
+              // source={{ uri: `${config.imgURL}/${props.auth.data.photo}` }}
+              source={{
+                uri:
+                  'https://images.unsplash.com/photo-1542931287-023b922fa89b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8N3x8dG9reW98ZW58MHx8MHw%3D&auto=format&fit=crop&w=500&q=60',
+              }}
+              style={{width: 95, height: 95, borderRadius: 50}}
+            />
+          </TouchableOpacity>
+        )}
       </View>
 
-      <Text style={[styles.title, { fontSize: 20, color: 'black' }]}>
+      <Text style={[styles.title, {fontSize: 20, color: 'black'}]}>
         {username}
       </Text>
 
-      <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 14 }}>
-        {city}
-      </Text>
+      <Text style={{fontFamily: 'Poppins-Regular', fontSize: 14}}>{city}</Text>
     </View>
   );
 
@@ -103,17 +135,17 @@ const HomeProfile = (props) => {
           marginVertical: 10,
           justifyContent: 'space-between',
         }}>
-        <Text style={[styles.title, { color: 'black' }]}>Cards</Text>
+        <Text style={[styles.title, {color: 'black'}]}>Cards</Text>
 
         <TouchableOpacity activeOpacity={0.6}>
-          <Text style={[styles.title, { color: '#2395FF' }]}>+ Add</Text>
+          <Text style={[styles.title, {color: '#2395FF'}]}>+ Add</Text>
         </TouchableOpacity>
       </View>
 
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        style={{ zIndex: 1999 }}>
+        style={{zIndex: 1999}}>
         {[1, 2, 3].map((value, key) => (
           <View
             key={key}
@@ -136,9 +168,9 @@ const HomeProfile = (props) => {
               4441 1235 5512 5551
             </Text>
             <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <Text style={{ color: 'white' }}>X Card</Text>
-              <Text style={{ color: 'white' }}>$ 1,440.2</Text>
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <Text style={{color: 'white'}}>X Card</Text>
+              <Text style={{color: 'white'}}>$ 1,440.2</Text>
             </View>
           </View>
         ))}
