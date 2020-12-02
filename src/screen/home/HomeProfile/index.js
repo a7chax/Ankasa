@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,12 +9,14 @@ import {
   Image,
   ScrollView,
   StatusBar,
+  Alert,
 } from 'react-native';
 import Icons from 'react-native-vector-icons/Feather';
 import Icons2 from 'react-native-vector-icons/FontAwesome';
 import Carousel from 'react-native-snap-carousel';
 import { useSelector, useDispatch } from 'react-redux';
 import { GetProfile } from '../../../redux/actions/Profiles';
+import ImagePicker from 'react-native-image-picker';
 
 const { width } = Dimensions.get('screen');
 
@@ -25,7 +27,26 @@ const HomeProfile = (props) => {
   const { username, city } = data;
   const dispatch = useDispatch();
 
+  const [newImage, setNewImage] = useState(null);
+  const handleChoosePhoto = () => {
+    console.log('test');
+    const options = {
+      noData: true,
+    }
+    ImagePicker.showImagePicker(options, response => {
+      if (response.uri) {
+        if (response.fileSize > 1024 * 1024 * 3) {
+          Alert.alert('Image size is too large.', 'The maximum size is 3 MB. Please choose another image.')
+        } else {
+          setNewImage(response);
+        }
+      }
+    })
+  }
 
+  useEffect(() => {
+    // if (newImage !== null) handleEdit();
+  }, [newImage])
 
   const gotoEditProfile = () => {
     props.navigation.navigate('EditProfile')
@@ -76,13 +97,24 @@ const HomeProfile = (props) => {
           borderColor: '#2395FF',
           borderRadius: 55,
         }}>
-        <Image
-          source={{
-            uri:
-              'https://images.unsplash.com/photo-1542931287-023b922fa89b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8N3x8dG9reW98ZW58MHx8MHw%3D&auto=format&fit=crop&w=500&q=60',
-          }}
-          style={{ width: 95, height: 95, borderRadius: 50 }}
-        />
+
+        {newImage
+          ? <TouchableOpacity onPress={() => handleChoosePhoto()}>
+            <Image
+              source={{ uri: `${newImage.uri}` }}
+              style={{ width: 95, height: 95, borderRadius: 50 }}
+            />
+          </TouchableOpacity>
+          : <TouchableOpacity onPress={() => handleChoosePhoto()}>
+            <Image
+              // source={{ uri: `${config.imgURL}/${props.auth.data.photo}` }}
+              source={{
+                uri:
+                  'https://images.unsplash.com/photo-1542931287-023b922fa89b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8N3x8dG9reW98ZW58MHx8MHw%3D&auto=format&fit=crop&w=500&q=60',
+              }}
+              style={{ width: 95, height: 95, borderRadius: 50 }}
+            />
+          </TouchableOpacity>}
       </View>
 
       <Text style={[styles.title, { fontSize: 20, color: 'black' }]}>
