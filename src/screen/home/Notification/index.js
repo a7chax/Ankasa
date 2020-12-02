@@ -8,6 +8,7 @@ import styles from './notification.style.js'
 import {Navigation} from '../../../components/'
 import {useSelector, useDispatch} from 'react-redux';
 import {getNotif} from '../../../redux/actions/DetailBooking'
+import moment from 'moment';
 
 function Notification({navigation}){
 
@@ -44,27 +45,47 @@ function Notification({navigation}){
 					<Text style={styles.textLarge}>Notifications</Text>
 				</View>
 
-				{ dataNotif ==  '' && dataNotif ==  undefined ? <Text></Text> :  dataNotif.map( item => {
-					return(
-						<>
+
+					{ dataNotif == '' || dataNotif == undefined ? 
+						(
 						<View style={styles.boxNotif}>
 							<View style={styles.innerNotifPos}>
 								<View>
-									<Text style={styles.notifTitle}>Congratulations</Text>
+									<Text style={styles.notifTitle}>{dataNotif.title}</Text>
 								</View>
 								<View>
-									<Text style={styles.notifDesc}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore....</Text>
+									<Text style={styles.notifDesc}>{dataNotif.description}</Text>
 								</View>
 								<View>
-									<Text style={styles.notifDate}>1 June 2020, 12:33 AM</Text>
+									<Text style={styles.notifDate}>{dataNotif.created_at}</Text>
 								</View>
 							</View>
-						</View>							
-						</>
-						)
-				})
+						</View>		
+						):
+						
+						<Text style={{fontSize : 19}}>Data tidak ditemukan</Text> || dataNotif.map(item => {
+							return(
+								<View style={styles.boxNotif}>
+									<View style={styles.innerNotifPos}>
+										<View>
+											<Text style={styles.notifTitle}>{dataNotif.title}</Text>
+										</View>
+										<View>
+											<Text style={styles.notifDesc}>{dataNotif.description}</Text>
+										</View>
+										<View>
+											<Text style={styles.notifDate}>{dataNotif.created_at}</Text>
+										</View>
+									</View>
+								</View>		
+							)
+						})
 
-				}
+						
+
+					}
+					
+				
 
 
 			</View>

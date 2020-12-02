@@ -17,6 +17,12 @@ function MyBooking({navigation}) {
   // const {username, city} = data;
   const dispatch = useDispatch();
 
+  const VIEWABILITY_CONFIG = {
+    minimumViewTime: 3000,
+    viewAreaCoveragePercentThreshold: 100,
+    waitForInteraction: true,
+  };
+
   const gotoNotif = () => {
     navigation.navigate('Notification')
   }
@@ -144,8 +150,10 @@ function MyBooking({navigation}) {
 
       <FlatList
         data={data}
+        inverted={true}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
+        
       />
     </View>
   );
