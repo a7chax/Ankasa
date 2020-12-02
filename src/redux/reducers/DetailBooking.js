@@ -1,6 +1,6 @@
 const initialState = {
   data: {},
-  dataNotif : ''
+  dataNotif: [],
 };
 
 const DetailBooking = (state = initialState, action = {}) => {
@@ -17,7 +17,6 @@ const DetailBooking = (state = initialState, action = {}) => {
         ...state,
         dataNotif: action.payload,
       };
-
 
     default:
       return state;
