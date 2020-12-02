@@ -31,7 +31,7 @@ const HomeExplore = (props) => {
   }
 
   const gotoChat = () => {
-   navigation.navigate('Chat')
+    props.navigation.navigate('Chat')
   }
 
   React.useEffect(() => {
@@ -77,8 +77,8 @@ const HomeExplore = (props) => {
     <View style={[styles.appBar]}>
       <Text style={[styles.appBarTitle]}>Explore</Text>
 
-      <View style={[styles.appBarRight]} onPress={() => gotoChat()}>
-        <TouchableOpacity activeOpacity={0.6}>
+      <View style={[styles.appBarRight]} >
+        <TouchableOpacity activeOpacity={0.6} onPress={() => gotoChat()}>
           <Icons
             name="mail"
             size={28}

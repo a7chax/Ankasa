@@ -48,8 +48,8 @@ function MyBooking({navigation}) {
       <Text style={[styles.appBarTitle]}>My Booking</Text>
 
 
-      <View style={[styles.appBarRight]} onPress={() => gotoChat()}>
-        <TouchableOpacity activeOpacity={0.6}>
+      <View style={[styles.appBarRight]}>
+        <TouchableOpacity activeOpacity={0.6}  onPress={() => gotoChat()}>
           <Icons
             name="mail"
             size={28}
@@ -153,7 +153,7 @@ function MyBooking({navigation}) {
         inverted={true}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        
+
       />
     </View>
   );
