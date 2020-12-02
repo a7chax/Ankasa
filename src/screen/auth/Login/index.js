@@ -8,7 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-
+import messaging from '@react-native-firebase/messaging';
 import {Button} from 'react-native-paper';
 import {ButtonWelcome, ButtonSignIn, ButtonSignUp} from '../../../components';
 import {useDispatch} from 'react-redux';
@@ -25,14 +25,18 @@ const Login = ({navigation}) => {
 
   const submitLogin = () => {
     setLoading(true);
-    const data = {email, password};
-    const callbackHandler = (err) => {
-      setLoading(false);
+    messaging()
+      .getToken()
+      .then((device) => {
+        const data = {email, password, device};
+        const callbackHandler = (err) => {
+          setLoading(false);
 
-      if (err) return false;
-      navigation.replace('User');
-    };
-    dispatch(AuthLogin(data, callbackHandler));
+          if (err) return false;
+          navigation.replace('User');
+        };
+        dispatch(AuthLogin(data, callbackHandler));
+      });
   };
 
   return (

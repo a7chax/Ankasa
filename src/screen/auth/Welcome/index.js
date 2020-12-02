@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  StatusBar,
 } from 'react-native';
 import {Button} from 'react-native-paper';
 // import Welcome from '../../../assets'
@@ -15,39 +16,39 @@ const Welcome = (props) => {
   const [loading, setLoading] = React.useState(false);
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={{alignItems: 'center'}}>
-        <Image
-          source={require('../../../assets/illustration/welcome-screen.png')}
-        />
-        <Text style={styles.text1}>Get Started</Text>
-        <Text style={styles.text2}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore
-        </Text>
-
-        <View style={{marginTop: 60}}>
-          <ButtonWelcome
-            title="Create My Account"
-            disabled={loading}
-            loading={loading}
-            onPress={() => props.navigation.navigate('Register')}
+    <>
+      <StatusBar barStyle="dark-content" />
+      <ScrollView style={styles.container}>
+        <View style={{alignItems: 'center'}}>
+          <Image
+            source={require('../../../assets/illustration/welcome-screen.png')}
           />
-        </View>
+          <Text style={styles.text1}>Get Started</Text>
+          <Text style={styles.text2}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore
+          </Text>
 
-        <View style={{marginTop: 20}}>
-          <TouchableOpacity 
-          disabled={loading}
-          loading={loading}
-          onPress={() => props.navigation.navigate('Login')}>
-            <Text
-              style={styles.signin}>
-              Sign In
-            </Text>
-          </TouchableOpacity>
+          <View style={{marginTop: 60}}>
+            <ButtonWelcome
+              title="Create My Account"
+              disabled={loading}
+              loading={loading}
+              onPress={() => props.navigation.navigate('Register')}
+            />
+          </View>
+
+          <View style={{marginTop: 20}}>
+            <TouchableOpacity
+              disabled={loading}
+              loading={loading}
+              onPress={() => props.navigation.navigate('Login')}>
+              <Text style={styles.signin}>Sign In</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </>
   );
 };
 
@@ -75,5 +76,5 @@ const styles = StyleSheet.create({
     paddingRight: 125,
     color: '#2395FF',
     padding: 6,
-  }
+  },
 });

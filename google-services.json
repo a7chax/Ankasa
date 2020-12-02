@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1084559817876",
+    "firebase_url": "https://ankasa-59210.firebaseio.com",
+    "project_id": "ankasa-59210",
+    "storage_bucket": "ankasa-59210.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084559817876:android:17d42068053d6869440881",
+        "android_client_info": {
+          "package_name": "com.frontend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084559817876-mjgnvsro16ak9h3km4rlrasg9tgidqu6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjK0nKdY2LoDBMyr9ZkB-1JNqcp42Ystc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1084559817876-mjgnvsro16ak9h3km4rlrasg9tgidqu6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

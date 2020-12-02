@@ -25,7 +25,6 @@ function User() {
       <Stack.Screen name="FlightDetail" component={FlightDetail} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="Chat" component={Chat} />
-      <Stack.Screen name="MyBooking" component={MyBooking} />
     </Stack.Navigator>
   );
 }

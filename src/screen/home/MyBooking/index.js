@@ -24,12 +24,12 @@ function MyBooking({navigation}) {
   };
 
   const gotoNotif = () => {
-    navigation.navigate('Notification')
-  }
+    navigation.navigate('Notification');
+  };
 
   const gotoChat = () => {
-   navigation.navigate('Chat') 
-  }
+    navigation.navigate('Chat');
+  };
 
   React.useEffect(() => {
     const callbackHandler = (err) => {
@@ -41,15 +41,12 @@ function MyBooking({navigation}) {
     dispatch(GetMyBooking(token, callbackHandler));
   }, []);
 
-
-
   const AppBar = () => (
     <View style={[styles.appBar]}>
       <Text style={[styles.appBarTitle]}>My Booking</Text>
 
-
       <View style={[styles.appBarRight]}>
-        <TouchableOpacity activeOpacity={0.6}  onPress={() => gotoChat()}>
+        <TouchableOpacity activeOpacity={0.6} onPress={() => gotoChat()}>
           <Icons
             name="mail"
             size={28}
@@ -61,7 +58,6 @@ function MyBooking({navigation}) {
         <TouchableOpacity
           onPress={() => props.navigation.navigate('Notification')}
           activeOpacity={0.6}>
-
           <Icons
             name="bell"
             size={28}
@@ -153,7 +149,6 @@ function MyBooking({navigation}) {
         inverted={true}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-
       />
     </View>
   );

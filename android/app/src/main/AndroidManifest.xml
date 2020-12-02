@@ -35,6 +35,10 @@
         android:launchMode="singleTask"
         android:windowSoftInputMode="adjustResize"
         android:exported="true">
+        <intent-filter>
+          <action android:name=".MainActivity"/>
+          <category android:name="android.intent.category.DEFAULT"/>
+        </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>

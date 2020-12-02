@@ -16,6 +16,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {getDestination} from '../../../redux/actions/Destination';
 import {ActivityIndicator} from 'react-native-paper';
 import {GetProfile} from '../../../redux/actions/Profiles';
+import {GetMyBooking} from '../../../redux/actions/MyBooking';
+import messaging from '@react-native-firebase/messaging';
 
 const {width} = Dimensions.get('screen');
 
@@ -27,16 +29,34 @@ const HomeExplore = (props) => {
   const dispatch = useDispatch();
 
   const gotoNotif = () => {
-    props.navigation.navigate('Notification')
-  }
+    props.navigation.navigate('Notification');
+  };
 
   const gotoChat = () => {
-    props.navigation.navigate('Chat')
-  }
+    props.navigation.navigate('Chat');
+  };
 
   React.useEffect(() => {
+    messaging()
+      .getInitialNotification()
+      .then((remoteMessage) => {
+        if (remoteMessage) {
+          LoadBooking();
+        }
+      });
+
     LoadProfile();
   }, []);
+
+  const LoadBooking = () => {
+    const callbackHandler = (err) => {
+      setLoading(false);
+      if (err) return false;
+    };
+    dispatch(GetMyBooking(token, callbackHandler));
+
+    props.navigation.navigate('Notification');
+  };
 
   const LoadProfile = () => {
     const callbackHandler = (err, res) => {
@@ -77,7 +97,7 @@ const HomeExplore = (props) => {
     <View style={[styles.appBar]}>
       <Text style={[styles.appBarTitle]}>Explore</Text>
 
-      <View style={[styles.appBarRight]} >
+      <View style={[styles.appBarRight]}>
         <TouchableOpacity activeOpacity={0.6} onPress={() => gotoChat()}>
           <Icons
             name="mail"
@@ -87,10 +107,7 @@ const HomeExplore = (props) => {
           />
         </TouchableOpacity>
 
-
-        
-
-<TouchableOpacity activeOpacity={0.6} onPress={() => gotoNotif()}>
+        <TouchableOpacity activeOpacity={0.6} onPress={() => gotoNotif()}>
           <Icons
             name="bell"
             size={28}
