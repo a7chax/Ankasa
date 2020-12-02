@@ -10,12 +10,13 @@ import {
   ScrollView,
   StatusBar,
   Alert,
+  ToastAndroid,
 } from 'react-native';
 import Icons from 'react-native-vector-icons/Feather';
 import Icons2 from 'react-native-vector-icons/FontAwesome';
 import Carousel from 'react-native-snap-carousel';
 import {useSelector, useDispatch} from 'react-redux';
-import {GetProfile} from '../../../redux/actions/Profiles';
+import {GetProfile, UploadPhoto} from '../../../redux/actions/Profiles';
 import ImagePicker from 'react-native-image-picker';
 
 const {width} = Dimensions.get('screen');
@@ -23,6 +24,7 @@ const {width} = Dimensions.get('screen');
 const HomeProfile = (props) => {
   const {data} = useSelector((s) => s.Profiles);
   const {token} = useSelector((s) => s.Auth);
+  const [photo, setPhoto] = useState('')
   const [loading, setLoading] = useState(true);
   const {username, city} = data;
   const dispatch = useDispatch();
@@ -48,8 +50,21 @@ const HomeProfile = (props) => {
   };
 
   useEffect(() => {
-    // if (newImage !== null) handleEdit();
+    if (newImage !== null) handleEdit();
+    console.log(data, 'data')
   }, [newImage]);
+
+  const handleEdit = () => {
+    let data = {photo: photo}
+
+    dispatch(UploadPhoto(data, token))
+    ToastAndroid.show('Success upload photo', ToastAndroid.SHORT)
+
+    const callbackHandler = (err) => {
+      if (err) return false;
+    };
+    dispatch(GetProfile(token, callbackHandler));
+  }
 
   const gotoEditProfile = () => {
     props.navigation.navigate('EditProfile');
@@ -108,7 +123,7 @@ const HomeProfile = (props) => {
         ) : (
           <TouchableOpacity onPress={() => handleChoosePhoto()}>
             <Image
-              // source={{ uri: `${config.imgURL}/${props.auth.data.photo}` }}
+              // source={{ uri: `${config.imgURL}/${data.photo}` }}
               source={{
                 uri:
                   'https://images.unsplash.com/photo-1542931287-023b922fa89b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8N3x8dG9reW98ZW58MHx8MHw%3D&auto=format&fit=crop&w=500&q=60',
