@@ -68,7 +68,7 @@ function MyBooking({navigation}) {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => props.navigation.navigate('Notification')}
+          onPress={() => navigation.navigate('Notification')}
           activeOpacity={0.6}>
           <Icons
             name="bell"
