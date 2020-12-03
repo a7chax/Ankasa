@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "1084559817876",
-    "firebase_url": "https://ankasa-59210.firebaseio.com",
-    "project_id": "ankasa-59210",
-    "storage_bucket": "ankasa-59210.appspot.com"
+    "project_number": "699363413596",
+    "project_id": "ankasa-4e49d",
+    "storage_bucket": "ankasa-4e49d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1084559817876:android:17d42068053d6869440881",
+        "mobilesdk_app_id": "1:699363413596:android:97e269297ebbeddda12099",
         "android_client_info": {
           "package_name": "com.frontend"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1084559817876-mjgnvsro16ak9h3km4rlrasg9tgidqu6.apps.googleusercontent.com",
+          "client_id": "699363413596-an1un6o06o9q6rp7lbdr0qdml6vj02ie.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBjK0nKdY2LoDBMyr9ZkB-1JNqcp42Ystc"
+          "current_key": "AIzaSyBInrn7ZpdjIcEYAxCH0Mvafq7Jn07Lxkc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1084559817876-mjgnvsro16ak9h3km4rlrasg9tgidqu6.apps.googleusercontent.com",
+              "client_id": "699363413596-an1un6o06o9q6rp7lbdr0qdml6vj02ie.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
