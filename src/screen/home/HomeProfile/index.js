@@ -134,11 +134,11 @@ const HomeProfile = (props) => {
         )}
       </View>
 
-      <Text style={[styles.title, {fontSize: 20, color: 'black'}]}>
+      <Text style={[styles.title, {fontSize: 20,marginTop : 12, color: 'black'}]}>
         {username}
       </Text>
 
-      <Text style={{fontFamily: 'Poppins-Regular', fontSize: 14}}>{city}</Text>
+      <Text style={{fontFamily: 'Poppins-Regular', fontSize: 14}}>{city}, Indonesia</Text>
     </View>
   );
 
@@ -165,89 +165,122 @@ const HomeProfile = (props) => {
           <View
             key={key}
             style={{
-              marginBottom: 10,
+              marginHorizontal : 10,
+              marginVertical: 20,
               paddingHorizontal: 22,
               paddingVertical: 12,
-              width: width / 1.6,
+              width: width / 1.8,
+              height : 75,
               borderRadius: 10,
+              shadowColor: "#2395FF",
               backgroundColor: '#2395FF',
               elevation: 8,
               margin: 2,
             }}>
-            <Text
-              style={{
-                letterSpacing: 1.5,
-                fontFamily: 'Poppins-Bold',
-                color: 'white',
-              }}>
-              4441 1235 5512 5551
-            </Text>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={{color: 'white'}}>X Card</Text>
-              <Text style={{color: 'white'}}>$ 1,440.2</Text>
+            <View style={{marginTop : 3}}>
+              <Text
+                style={{
+                  letterSpacing: 1.5,
+                  fontFamily: 'Poppins-Bold',
+                  color: 'white',
+                }}>
+                4441 1235 5512 5551
+              </Text>
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text style={{color: 'white'}}>X Card</Text>
+                <Text style={{color: 'white'}}>$ 1,440.2</Text>
+              </View>
             </View>
           </View>
         ))}
       </ScrollView>
 
-      <View>
+      <View >
         <TouchableOpacity
           activeOpacity={0.6}
           style={{
-            padding: 8,
-            marginVertical: 2,
+            marginHorizontal : 10,
+            marginVertical: 20,
             flexDirection: 'row',
-            alignItems: 'center',
+            justifyContent : 'space-between'
+
           }}>
-          <Icons2 name="star" size={24} color="#979797" />
-          <Text
-            style={{
-              fontFamily: 'Poppins-Medium',
-              color: 'black',
-              paddingLeft: 15,
-            }}>
-            My Review
-          </Text>
+          
+            <View style={{flexDirection : 'row', justifyContent : 'space-between'}}>
+            <Icons2 name="star" size={30} color="#979797" />
+            <Text
+              style={{
+                fontFamily: 'Poppins-SemiBold',
+                color: 'black',
+                fontSize : 14,
+                lineHeight : 30,
+                paddingLeft: 15,                
+              }}>
+              My Review
+            </Text>
+            </View>
+
+            <View>
+              <Icons2 name="chevron-right" style={{lineHeight : 30}} size={25} color={'#979797'}/>
+            </View>
+                   
+
         </TouchableOpacity>
 
         <TouchableOpacity
           activeOpacity={0.6}
           style={{
-            padding: 8,
-            marginVertical: 2,
+            marginHorizontal : 10,
+            marginVertical: 20,
             flexDirection: 'row',
-            alignItems: 'center',
+            justifyContent : 'space-between',
           }}>
-          <Icons2 name="cog" size={24} color="#979797" />
-          <Text
-            style={{
-              fontFamily: 'Poppins-Medium',
-              color: 'black',
-              paddingLeft: 15,
-            }}>
-            Settings
-          </Text>
+          <View style={{flexDirection : 'row', justifyContent : 'space-between'}}>
+            <Icons2 name="cog" size={30} color="#979797" />
+            <Text
+              style={{
+                fontFamily: 'Poppins-SemiBold',
+                color: 'black',
+                paddingLeft: 15,
+                lineHeight : 30,
+                fontSize : 14,              
+              }}>
+              Settings
+            </Text>
+          </View>
+
+          <View>
+              <Icons2 name="chevron-right" style={{lineHeight : 30}} size={25} color={'#979797'}/>            
+          </View>
         </TouchableOpacity>
 
         <TouchableOpacity
           activeOpacity={0.6}
           style={{
-            padding: 8,
-            marginVertical: 2,
+            marginHorizontal : 10,
+            marginVertical: 20,
             flexDirection: 'row',
-            alignItems: 'center',
+            justifyContent : 'space-between',
           }}
           onPress={onLogout}>
-          <Icons2 name="sign-out" size={24} color="#F24545" />
-          <Text
-            style={{
-              fontFamily: 'Poppins-Medium',
-              color: '#F24545',
-              paddingLeft: 15,
-            }}>
-            Logout
-          </Text>
+          <View style={{flexDirection : 'row', justifyContent : 'space-between'}}>
+            <Icons2 name="sign-out" size={30} color="#F24545" />
+            <Text
+              style={{
+                fontFamily: 'Poppins-SemiBold',
+                color: '#F24545',
+                paddingLeft: 15,
+                fontSize : 14,   
+                lineHeight : 30,                                         
+              }}>
+              Logout
+            </Text>
+          </View>
+
+          <View>
+            <Icons2 name="chevron-right" style={{lineHeight : 30}} size={25} color={'#F24545'}/>                        
+          </View>
         </TouchableOpacity>
       </View>
     </>
