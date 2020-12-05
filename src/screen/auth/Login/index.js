@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  Image,
-  TextInput,
-  TouchableOpacity,
+ 	StyleSheet,
+ 	Text,
+ 	View,
+ 	ScrollView,
+ 	Image,
+  	TextInput,
+ 	TouchableOpacity,
 } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import {Button} from 'react-native-paper';
@@ -15,53 +15,53 @@ import {useDispatch} from 'react-redux';
 import {AuthLogin} from '../../../redux/actions/Auth';
 
 const Login = ({navigation}) => {
-  const [loading, setLoading] = React.useState(false);
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [secure, setSecure] = React.useState(true);
+	const [loading, setLoading] = React.useState(false);
+ 	const [email, setEmail] = React.useState('');
+ 	const [password, setPassword] = React.useState('');
+ 	const [secure, setSecure] = React.useState(true);
 
-  const inputPassword = React.useRef();
-  const dispatch = useDispatch();
+ 	const inputPassword = React.useRef();
+ 	const dispatch = useDispatch();
 
-  const submitLogin = () => {
-    setLoading(true);
-    messaging()
-      .getToken()
-      .then((device) => {
-        const data = {email, password, device};
-        const callbackHandler = (err) => {
-          setLoading(false);
+  	const submitLogin = () => {
+	    setLoading(true);
+	    messaging()
+	      .getToken()
+	      .then((device) => {
+	        const data = {email, password, device};
+	        const callbackHandler = (err) => {
+	          setLoading(false);
 
-          if (err) return false;
-          navigation.replace('User');
-        };
-        dispatch(AuthLogin(data, callbackHandler));
-      });
+	          if (err) return false;
+	          navigation.replace('User');
+	        };
+	        dispatch(AuthLogin(data, callbackHandler));
+	      });
   };
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.nav}>
-        <Image source={require('../../../assets/illustration/vector02.png')} />
-        <Text style={styles.Text1}>Ankasa</Text>
-      </View>
+     	<View style={styles.nav}>
+        	<Image source={require('../../../assets/illustration/vector02.png')} />
+        	<Text style={styles.Text1}>Ankasa</Text>
+      	</View>
 
-      <View>
-        <Text style={styles.Text2}>Login</Text>
-      </View>
+      	<View>
+        	<Text style={styles.Text2}>Login</Text>
+      	</View>
 
-      <View style={{alignItems: 'center'}}>
-        <View style={styles.inputItem}>
-          <TextInput
-            style={{width: '100%'}}
-            placeholder="Username"
-            autoCapitalize={'none'}
-            onChangeText={(text) => setEmail(text)}
-            onSubmitEditing={() => inputPassword.current.focus()}
-            returnKeyType="next"
-            underlineColorAndroid="#fff"
-          />
-        </View>
+      	<View style={{alignItems: 'center'}}>
+	        <View style={styles.inputItem}>
+	          <TextInput
+	            style={{width: '100%'}}
+	            placeholder="Username"
+	            autoCapitalize={'none'}
+	            onChangeText={(text) => setEmail(text)}
+	            onSubmitEditing={() => inputPassword.current.focus()}
+	            returnKeyType="next"
+	            underlineColorAndroid="#fff"
+	          />
+	        </View>
 
         <View style={styles.inputItem}>
           <TextInput

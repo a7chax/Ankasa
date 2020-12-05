@@ -73,6 +73,7 @@ const SearchFlight = (props) => {
 
   const [tujuan, setTujuan] = useState('');
   const [asal, setAsal] = useState('Bogor');
+  const [switchFrom, setSwitchFrom] = useState(false)
 
   const refRBSheetDepart = useRef();
   const refRBSheetReturn = useRef();
@@ -97,6 +98,7 @@ const SearchFlight = (props) => {
 
     return momentString;
   }
+
   const departDateView = formatDateView(departDate);
   const returnDateView = formatDateView(returnDate);
 
@@ -127,6 +129,17 @@ const SearchFlight = (props) => {
   }, []);
 
   const onPress = () => {};
+
+  const switchDepart = () => {
+    setSwitchFrom(!switchFrom)    
+    if(switchFrom){ 
+        setAsal(props.route.params.city) 
+        setTujuan(asal)
+    } else {
+        setAsal(tujuan) 
+        setTujuan(props.route.params.city)
+    }
+  }
 
   const kembali = () => {
     props.navigation.goBack('Home');
@@ -163,6 +176,7 @@ const SearchFlight = (props) => {
       <ScrollView style={{backgroundColor: '#fff'}}>
         <View style={{backgroundColor: '#fff'}}>
           <View style={style.jumbotron}>
+
             <Image
               source={{uri: props.route.params.photo}}
               style={{
@@ -268,10 +282,12 @@ const SearchFlight = (props) => {
                 </Text>
               </View>
 
-              <Image
-                source={require('../../../assets/illustration/switch2.png')}
-                style={{position: 'absolute', left: '50%', top: '50%'}}
-              />
+              <TouchableNativeFeedback onPress={() => switchDepart()}>
+                <Image
+                  source={require('../../../assets/illustration/switch2.png')}
+                  style={{position: 'absolute', left: '50%', top: '50%'}}
+                />
+              </TouchableNativeFeedback>
 
               <View>
                 <Text

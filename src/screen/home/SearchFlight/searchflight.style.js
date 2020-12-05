@@ -7,7 +7,7 @@ export default StyleSheet.create({
 		backgroundColor: '#2395FF', 
 		borderRadius: 10 , 
 		width : wp(43),
-		height : hp(6)
+		height : 50 
 	},
 	buttonNonActive : {
 		backgroundColor: '#F0F0F0',

@@ -2,8 +2,6 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   colorContainer: {
-    marginTop: 24,
-    backgroundColor: '#D5CDDC',
     flex: 1,
     flexDirection: 'column',
   },
@@ -11,18 +9,20 @@ export default StyleSheet.create({
     resizeMode: 'cover',
   },
   topBar: {
-    backgroundColor: '#2395FF',
+    
   },
   topBarContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 15,
+    backgroundColor: '#2395FF',         
+    borderBottomWidth : 0.1,
+    borderColor : 'black',
     width: '100%',
   },
   customerService: {
+  	paddingTop : 25,
     flexDirection: 'row',
-    marginLeft: '5%',
-    alignItems: 'center',
+    justifyContent : 'space-between', 
+    margin : 25
+    
   },
   profPic: {
     width: 40,
@@ -31,48 +31,65 @@ export default StyleSheet.create({
   },
   topBarText: {
     fontWeight: 'bold',
-    color: '#FFF',
-    fontSize: 18,
-    marginLeft: '2%',
+    fontFamily : 'Poppins-SemiBold',
+    color: '#fcfcfc',
+    fontSize: 19,
+    marginHorizontal : 5
   },
-  botChat: {
-    backgroundColor: '#FAFCFF',
-    padding: 20,
-    margin: 20,
-    width: '50%',
-    borderRadius: 20,
-  },
+  chatReceiver: {
+    backgroundColor: '#e6e6e6',
+
+    borderBottomLeftRadius : 12,
+    borderBottomRightRadius : 12,
+    borderTopRightRadius : 12,
+    marginRight: 'auto',
+  },  
   chatSent: {
-    backgroundColor: '#FAFCFF',
-    padding: 20,
-    margin: 20,
-    width: '50%',
-    borderRadius: 20,
+    backgroundColor: '#2395FF',
+
+    borderBottomLeftRadius : 12,
+    borderBottomRightRadius : 12,
+    borderTopLeftRadius : 12,
     marginLeft: 'auto',
   },
   input: {
-    backgroundColor: '#FFF',
-    paddingLeft: 20,
+    backgroundColor: 'white',
+    borderBottomWidth : 0.9,
+    borderRightWidth : 0.9,
+    borderLeftWidth : 0.9,
     fontSize: 17,
     borderRadius: 30,
-    width: '80%',
+    
+    paddingHorizontal : 25,
+    width: '85%',
+  },
+  receiverText :{
+  	fontFamily : 'Poppins-Regular',	
+	textAlign : 'left',
+	color : 'black'
+  },
+  senderText : {
+  	fontFamily : 'Poppins-Regular',	
+	textAlign : 'left',
+	color : 'white'  	
   },
   chatContainer: {
+    
+    borderWidth : 0.9,
+    borderColor : 'black',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: 'auto',
-    marginVertical: 10,
+    
     paddingHorizontal: 10,
   },
   button: {
-    borderRadius: 50,
-    backgroundColor: 'white',
-    width: 50,
-    height: 50,
+  	marginRight : 10,
+      
   },
   submitButton: {
     alignSelf: 'center',
-    marginTop: 12,
+    
   },
 });

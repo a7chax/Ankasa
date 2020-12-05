@@ -7,6 +7,7 @@ import DetailBooking from './DetailBooking';
 import EditProfile from './EditProfile';
 import Booking from './Booking'
 import MyBooking from './MyBooking';
+import Chat from './Chat';
 
 const reducers = combineReducers({
   Auth,
@@ -16,7 +17,8 @@ const reducers = combineReducers({
   DetailBooking,
   EditProfile,
   Booking,
-  MyBooking
+  MyBooking,
+  Chat
 });
 
 export default reducers;
