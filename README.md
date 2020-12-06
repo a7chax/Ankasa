@@ -3,7 +3,7 @@ Before using our application, please install the method below
 
 And clone our code using:
 ```git
-$ git clone https://github.com/FIre-Techno/FireTechno-frontend.git
+$ git clone https://github.com/a7cha/Ankasa.git
 ```
 
 ## Instalation
