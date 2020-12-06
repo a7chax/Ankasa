@@ -47,15 +47,17 @@ export default function Chat({navigation}) {
 
 	useEffect(() => {
 		dispatch(getChat(token, 7,3))
-		dispatch(getChatReceiver(token, 3,7))
+		// dispatch(getChatReceiver(token, 3,7))
 		setChatSender(data.data)
 		// setChatReceiver(data.dataReceiver)
 		// data.data.map((item, index) => {
 		// 	setChatSender({})
 		// })
 		// console.log(chatReceiver, 'ini data terima')
+
+		// setChat(chatReceiver)
 		
-		console.log(data.data[0],' ini datanya')
+		console.log(chatSender,' ini datanya')
 	},[])
 
   
@@ -83,47 +85,52 @@ export default function Chat({navigation}) {
 	  
 	  	<View style={{marginHorizontal : 20, marginVertical : 20,}}>	
 
-{/* 	  		{ chatSender.map((item, index )=> { */}
-{/*  */}
-{/* 				function dynamicDate(date){ */}
-{/* 			  		if(date == "2020-12-01 22:04:01"){ */}
-{/* 			  			const today = moment(date).format('HH : mm'); 			 */}
-{/* 			  			return today */}
-{/* 			  		} else { */}
-{/* 			  			const today = moment().format('dddd, D MMM yy') */}
-{/* 			  			return today */}
-{/* 			  		}  		 	 */}
-{/* 				}	  			 */}
-{/* 	  			return( */}
-{/* 	  				<> */}
-{/* 					 <View style={{paddingRight : '30%',paddingVertical : 3}}> */}
-{/* 					  	<View style={styles.chatReceiver}> */}
-{/* 							<View style={{marginHorizontal : 10, marginTop : 10,marginBottom : 5}}> */}
-{/* 								<Text style={styles.receiverText}>Hi, Ask me anythinadf!</Text> */}
-{/* 								<View style={{marginTop : 3}}> */}
-{/* 									<Text style={{textAlign : 'right', color : '#707070'}}>{sekarang}</Text> */}
-{/* 								</View> */}
-{/* 							</View> */}
-{/* 					  	</View> */}
-{/* 					 </View> */}
-{/* 					 			 			 			 		 */}
-{/* 					<View style={{paddingLeft : '30%',paddingVertical : 3}}> */}
-{/* 						<View style={styles.chatSent}> */}
-{/* 							<View style={{ */}
-{/* 								marginHorizontal : 10,  */}
-{/* 								marginTop : 10, */}
-{/* 								marginBottom : 5 }}> */}
-{/* 								<Text style={styles.senderText}>{item.message}</Text> */}
-{/* 								<View style={{marginTop : 3}}> */}
-{/* 									<Text style={{textAlign : 'right', color : '#ededed'}}>{dynamicDate(item.created_at)}</Text> */}
-{/* 								</View>                         */}
-{/* 							</View> */}
-{/* 						</View> */}
-{/* 					</View>	 */}
-{/* 				</> */}
-{/* 	  			) */}
-{/* 	  		}) */}
-{/* 	  		} */}
+	  		{ data.data.reverse().map((item, index )=> {
+
+				function dynamicDate(date){
+			  		if(date == "2020-12-01 22:04:01"){
+			  			const today = moment(date).format('HH : mm'); 			
+			  			return today
+			  		} else {
+			  			const today = moment().format('dddd, D MMM yy')
+			  			return today
+			  		}  		 	
+				}	  			
+	  			return(	
+	  				<>
+	  					{ item.id_receiver === 7 ? 
+	  						(
+							 <View style={{paddingRight : '30%',paddingVertical : 3}}>
+							  	<View style={styles.chatReceiver}>
+									<View style={{marginHorizontal : 10, marginTop : 10,marginBottom : 5}}>
+										<Text style={styles.receiverText}>{item.message}</Text>
+										<View style={{marginTop : 3}}>
+											<Text style={{textAlign : 'right', color : '#707070'}}>{sekarang}</Text>
+										</View>
+									</View>
+							  	</View>
+							 </View>
+	  						) : (
+							<View style={{paddingLeft : '30%',paddingVertical : 3}}>
+								<View style={styles.chatSent}>
+									<View style={{
+										marginHorizontal : 10, 
+										marginTop : 10,
+										marginBottom : 5 }}>
+										<Text style={styles.senderText}>{item.message}</Text>
+										<View style={{marginTop : 3}}>
+											<Text style={{textAlign : 'right', color : '#ededed'}}>{dynamicDate(item.created_at)}</Text>
+										</View>                        
+									</View>
+								</View>
+							</View>	
+	  						)
+
+	  					}					 			 			 			 	
+				</>
+	  			)
+	  		})
+	  		}
 
 		
 

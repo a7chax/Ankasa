@@ -19,6 +19,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {GetProfile, UploadPhoto} from '../../../redux/actions/Profiles';
 import ImagePicker from 'react-native-image-picker';
 
+
 const {width} = Dimensions.get('screen');
 
 const HomeProfile = (props) => {

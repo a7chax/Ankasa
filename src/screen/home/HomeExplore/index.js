@@ -18,6 +18,7 @@ import {ActivityIndicator} from 'react-native-paper';
 import {GetProfile} from '../../../redux/actions/Profiles';
 import {GetMyBooking} from '../../../redux/actions/MyBooking';
 import messaging from '@react-native-firebase/messaging';
+import {getChat} from '../../../redux/actions/Chat'
 
 const {width} = Dimensions.get('screen');
 
@@ -46,6 +47,7 @@ const HomeExplore = (props) => {
 			});
 
 		LoadProfile();
+		dispatch(getChat(token,7,3))
 	}, []);
 
 	const LoadBooking = () => {

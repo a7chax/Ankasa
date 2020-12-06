@@ -11,11 +11,11 @@ const Chat = (state =initalState, action = {}) => {
 				...state,
 				data : action.payload
 			};
-		// case 'GET_CHAT_RECEIVER' :
-		// 	return{
-		// 		...state,
-		// 		dataReceiver  : action.payload
-		// 	};
+		case 'GET_CHAT_RECEIVER' :
+			return{
+				...state,
+				dataReceiver  : action.payload
+			};
 		default :
 			return state
 	}
