@@ -1,9 +1,3 @@
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/70737408/100704735-91fa8900-33d8-11eb-8a7e-927eca2c5c61.jpg" width="500" height="500">
-</p>
-
-FireTechno presents an android ticketing application using React Native and Express Js
-
 ## Get Started
 Before using our application, please install the method below
 
