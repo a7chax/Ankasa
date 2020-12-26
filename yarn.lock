@@ -6112,10 +6112,10 @@ react-native-date-picker@^3.2.5:
   resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-3.2.5.tgz#351836282fc909e5c4de3d490846fcae16794c20"
   integrity sha512-OKIqx3ZSUsp7XWcfuiWouIfIyW+CK48kG8HC2ZzLm8bSrsruSo/+McIybZ7NYuIAgDB9z5omK18EA1oOZgITxA==
 
-react-native-dropdown-picker@^3.7.1:
-  version "3.7.1"
-  resolved "https://registry.yarnpkg.com/react-native-dropdown-picker/-/react-native-dropdown-picker-3.7.1.tgz#ead80b69108bfe8cf56fef5a68d5545d5063b33c"
-  integrity sha512-YyT4q+CgMw299ypSlvSOt/tZiYD0bsTmnNKazLwpYM3ouGaj34NTDS+MHVyiYpyZbn4XSs+FHRcs12PupWS7Cg==
+react-native-dropdown-picker@^3.7.5:
+  version "3.7.5"
+  resolved "https://registry.yarnpkg.com/react-native-dropdown-picker/-/react-native-dropdown-picker-3.7.5.tgz#b52729ee49ce58e314c81deac8306160df8a2091"
+  integrity sha512-eIOt5FdwBRIETZ0f3wJrdEAexXq02APdQS3ojILIyBEAorI49iq1q03GNahXx4ygMdNlI0TTEvXbZELHZ8ZUlg==
   dependencies:
     react-native-vector-icons "^7.0.0"
 
