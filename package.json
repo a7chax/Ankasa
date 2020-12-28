@@ -19,7 +19,7 @@
     "@react-navigation/stack": "^5.12.8",
     "axios": "^0.21.0",
     "moment": "^2.29.1",
-    "react": "16.13.1",
+    "react": "17.0.1",
     "react-native": "0.63.3",
     "react-native-barcode-builder": "^2.0.0",
     "react-native-date-picker": "^3.2.5",
@@ -50,13 +50,13 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/runtime": "^7.8.4",
-    "@react-native-community/eslint-config": "^1.1.0",
+    "@react-native-community/eslint-config": "2.0.0",
     "babel-jest": "^25.1.0",
     "eslint": "^6.5.1",
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-native-svg-transformer": "^0.14.3",
-    "react-test-renderer": "16.13.1"
+    "react-test-renderer": "17.0.1"
   },
   "jest": {
     "preset": "react-native"
